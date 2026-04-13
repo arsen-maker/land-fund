@@ -1,237 +1,318 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Land Alpha Fund I</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 :root{
-  --grn:#1F3D2B;--grn2:#2A5239;--grn3:#162D1F;
+  --gd:#162D1F;--gm:#1F3D2B;--gl:#2A5239;
   --gold:#C8A96A;--gold2:#A8854A;
-  --cream:#F5F3EF;--cream2:#EDE9E1;--cream3:#E3DDD5;
-  --char:#1A1A1A;--med:#3A3A3A;--muted:#7A7A6A;
+  --cr:#F5F3EF;--cr2:#EDE9E1;--cr3:#D8D2C8;
+  --ch:#1A1A1A;--md:#3A3A3A;--mu:#6A6A5A;
   --blue:#2E4A62;
 }
-body{font-family:Georgia,serif;background:var(--cream);color:var(--char)}
-section{padding:5rem 0;border-bottom:0.5px solid var(--cream3)}
-.inner{max-width:1080px;margin:0 auto;padding:0 2rem}
-.label{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.2rem;display:block}
-h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:400;line-height:1.1;color:var(--grn3)}
-h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;color:var(--grn3);line-height:1.2}
-h3{font-size:1.1rem;font-weight:500;color:var(--grn3);font-family:'Helvetica Neue',Arial,sans-serif}
-p{font-size:1rem;color:var(--med);line-height:1.75}
-.gold{color:var(--gold2)}
-.grn{color:var(--grn)}
-.sans{font-family:'Helvetica Neue',Arial,sans-serif}
+body{font-family:Georgia,serif;background:var(--cr);color:var(--ch)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
 
 /* NAV */
-nav{background:var(--grn3);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
-.nav-links{display:flex;gap:2rem}
-.nav-links a{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none}
+nav{background:var(--gd);padding:.9rem 2.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:999;gap:1rem}
+.nav-logo{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;white-space:nowrap}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color .2s}
 .nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--gd);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.48rem 1.2rem;font-weight:600;white-space:nowrap;border:none;cursor:pointer;transition:opacity .2s}
+.nav-cta:hover{opacity:.88}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--gold)}
+.mobile-menu{display:none;flex-direction:column;gap:0;background:var(--gd);padding:0 2.5rem}
+.mobile-menu a{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:.9rem 0;border-bottom:0.5px solid rgba(255,255,255,.06)}
+.mobile-menu.open{display:flex}
 
 /* HERO */
-.hero{background:var(--grn3);padding:0;border:none;min-height:520px;display:flex;align-items:stretch}
-.hero-left{flex:1;padding:5rem 3rem 5rem 2.5rem;max-width:580px;position:relative}
-.hero-grid{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 60px)}
-.hero-tag{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block}
-.hero h1{color:#fff;font-size:clamp(2.2rem,4.5vw,3.5rem);margin-bottom:1.2rem}
+#hero{display:flex;min-height:560px;border:none}
+.hero-l{flex:1.15;background:var(--gd);padding:5rem 3.5rem 5rem 2.5rem;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 64px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 64px)}
+.hero-tag{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.6rem;display:block;position:relative;z-index:1}
+.hero h1{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:400;color:#fff;line-height:1.08;margin-bottom:1.3rem;position:relative;z-index:1}
 .hero h1 em{color:var(--gold);font-style:normal}
-.hero-sub{font-size:1rem;color:rgba(255,255,255,.62);line-height:1.7;max-width:420px;margin-bottom:2.5rem;font-family:'Helvetica Neue',Arial,sans-serif}
-.hero-kpis{display:flex;gap:2.5rem;margin-bottom:2.5rem}
-.kpi-val{font-family:'Helvetica Neue',Arial,sans-serif;font-size:1.9rem;font-weight:500;color:var(--gold);display:block;line-height:1}
-.kpi-lbl{font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem;display:block}
-.btn-primary{display:inline-block;padding:.75rem 2rem;background:var(--gold);color:var(--grn3);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;text-decoration:none;border:none;cursor:pointer}
-.btn-ghost{display:inline-block;padding:.75rem 2rem;border:0.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;margin-left:1rem;cursor:pointer;background:transparent}
-.hero-right{flex:1;background:var(--grn2);display:flex;align-items:center;justify-content:center;padding:3rem;position:relative;overflow:hidden}
-.hero-circle1{position:absolute;width:320px;height:320px;border-radius:50%;border:0.5px solid rgba(200,169,106,.15);top:50%;left:50%;transform:translate(-50%,-50%)}
-.hero-circle2{position:absolute;width:220px;height:220px;border-radius:50%;border:0.5px solid rgba(200,169,106,.2);top:50%;left:50%;transform:translate(-50%,-50%)}
-.hero-stat-block{text-align:center;position:relative;z-index:2}
-.hero-big{font-size:4.5rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif}
-.hero-stat-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:.5rem}
+.hero-sub{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.92rem;color:rgba(255,255,255,.55);line-height:1.75;max-width:400px;margin-bottom:2.5rem;position:relative;z-index:1}
+.hero-kpis{display:flex;gap:2.5rem;margin-bottom:2.5rem;position:relative;z-index:1;flex-wrap:wrap}
+.kpi-val{font-size:1.9rem;font-weight:400;color:var(--gold);display:block;line-height:1;font-family:Georgia,serif}
+.kpi-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.62rem;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem;display:block}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;position:relative;z-index:1}
+.btn-gold{display:inline-block;padding:.78rem 2rem;background:var(--gold);color:var(--gd);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;transition:opacity .2s}
+.btn-gold:hover{opacity:.88}
+.btn-ghost{display:inline-block;padding:.78rem 2rem;border:0.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.62);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;background:transparent;transition:border-color .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5)}
+.hero-r{flex:1;background:var(--gl);display:flex;align-items:center;justify-content:center;padding:3rem;position:relative;overflow:hidden;min-height:300px}
+.h-c1{position:absolute;width:350px;height:350px;border-radius:50%;border:0.5px solid rgba(200,169,106,.1);top:50%;left:50%;transform:translate(-50%,-50%)}
+.h-c2{position:absolute;width:240px;height:240px;border-radius:50%;border:0.5px solid rgba(200,169,106,.16);top:50%;left:50%;transform:translate(-50%,-50%)}
+.h-c3{position:absolute;width:135px;height:135px;border-radius:50%;border:0.5px solid rgba(200,169,106,.24);top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-stat{text-align:center;position:relative;z-index:2}
+.hero-big{font-size:5rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif}
+.hero-stat-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:.65rem;line-height:1.7}
+
+/* SHARED */
+section{padding:5rem 0;border-bottom:0.5px solid var(--cr3)}
+.inner{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+.lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.1rem;display:block}
+h2{font-size:clamp(1.65rem,3vw,2.5rem);font-weight:400;color:var(--gd);line-height:1.18;margin-bottom:1.75rem}
+h3{font-size:1.05rem;font-weight:500;color:var(--gd);font-family:'Helvetica Neue',Arial,sans-serif}
+p{font-size:.92rem;color:var(--md);line-height:1.78}
+
+/* QUOTE */
+#quote{background:var(--cr);padding:5rem 0;text-align:center;border-bottom:0.5px solid var(--cr3)}
+.quote-rule{width:60px;height:1px;background:var(--gold2);margin:0 auto 2.5rem}
+.quote-rule.btm{margin:2.5rem auto 0}
+.quote-text{font-size:clamp(1.35rem,2.8vw,2rem);font-weight:400;color:var(--gd);line-height:1.45;max-width:720px;margin:0 auto;font-style:italic}
+.quote-attr{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-top:1.5rem}
 
 /* THESIS */
-.thesis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
-.thesis-card{background:var(--cream2);padding:2.5rem 2rem;position:relative}
-.thesis-card:first-child{background:var(--grn);color:#fff}
-.tc-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;color:var(--gold2);letter-spacing:.15em;margin-bottom:1rem;display:block}
-.thesis-card:first-child .tc-num{color:var(--gold)}
-.tc-head{font-size:1.3rem;font-weight:400;margin-bottom:.75rem;color:var(--grn3)}
-.thesis-card:first-child .tc-head{color:#fff}
-.tc-body{font-size:.88rem;color:var(--muted);line-height:1.65;font-family:'Helvetica Neue',Arial,sans-serif}
-.thesis-card:first-child .tc-body{color:rgba(255,255,255,.62)}
+.thesis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2.5rem}
+.tc{padding:2.8rem 2.2rem;background:var(--cr2)}
+.tc.feat{background:var(--gm)}
 .tc-rule{width:28px;height:2px;background:var(--gold);margin-bottom:1rem}
+.tc-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.62rem;color:var(--gold2);letter-spacing:.16em;margin-bottom:.85rem;display:block}
+.tc.feat .tc-num{color:var(--gold)}
+.tc-head{font-size:1.18rem;font-weight:400;margin-bottom:.8rem;color:var(--gd)}
+.tc.feat .tc-head{color:#fff}
+.tc-body{font-size:.85rem;color:var(--mu);line-height:1.72;font-family:'Helvetica Neue',Arial,sans-serif}
+.tc.feat .tc-body{color:rgba(255,255,255,.55)}
 
 /* ALPHA GAP */
-.alpha-bg{background:var(--grn3)}
-.alpha-bg h2{color:#fff}
-.alpha-bg .label{color:rgba(200,169,106,.8)}
-.alpha-intro{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.95rem;color:rgba(255,255,255,.6);margin-bottom:2.5rem;max-width:520px;line-height:1.7}
-.gap-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.gap-stat-row{margin-bottom:3rem}
-.gap-big{font-size:5rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif}
-.gap-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.4rem}
-.bar-compare{margin-top:2rem}
-.bar-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
-.bar-label{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:rgba(255,255,255,.55);width:130px;flex-shrink:0}
-.bar-track{flex:1;height:10px;background:rgba(255,255,255,.08)}
-.bar-fill{height:100%;transition:width .6s}
-.bar-fill.idx{background:rgba(255,255,255,.22)}
-.bar-fill.land{background:var(--gold)}
-.bar-val{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;font-weight:500;width:60px;text-align:right;color:rgba(255,255,255,.7)}
+#alpha{background:var(--gd);padding:5rem 0}
+#alpha h2{color:#fff}
+#alpha .lbl{color:rgba(200,169,106,.7)}
+.alpha-intro{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;color:rgba(255,255,255,.52);margin-bottom:3rem;max-width:540px;line-height:1.75}
+.alpha-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.gap-big{font-size:5.5rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif}
+.gap-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem;line-height:1.7}
+.bars{margin-top:2.2rem}
+.bar-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.bar-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:rgba(255,255,255,.48);width:145px;flex-shrink:0}
+.bar-track{flex:1;height:9px;background:rgba(255,255,255,.07)}
+.b-idx{height:100%;background:rgba(255,255,255,.2);width:22%}
+.b-land{height:100%;background:var(--gold);width:88%}
+.bar-val{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;font-weight:500;width:52px;text-align:right;color:rgba(255,255,255,.55)}
 .bar-val.hi{color:var(--gold)}
-.market-table{margin-top:1rem}
-.mt-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:0.5px solid rgba(255,255,255,.07)}
-.mt-market{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:rgba(255,255,255,.6)}
-.mt-idx{font-size:.82rem;color:rgba(255,255,255,.4);font-family:'Helvetica Neue',Arial,sans-serif}
-.mt-land{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.8);font-family:'Helvetica Neue',Arial,sans-serif}
-.mt-gap{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;font-weight:500;color:var(--gold)}
+.mkt-table{margin-top:.5rem}
+.mt-hdr{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:0.5px solid rgba(255,255,255,.1);margin-bottom:.25rem}
+.mt-hdr span{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.26)}
+.mt-row{display:flex;justify-content:space-between;align-items:center;padding:.62rem 0;border-bottom:0.5px solid rgba(255,255,255,.055)}
+.mt-m{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:rgba(255,255,255,.58);flex:1}
+.mt-i{font-size:.82rem;color:rgba(255,255,255,.32);font-family:'Helvetica Neue',Arial,sans-serif;width:48px;text-align:center}
+.mt-l{font-size:.88rem;font-weight:500;color:rgba(255,255,255,.75);font-family:'Helvetica Neue',Arial,sans-serif;width:48px;text-align:center}
+.mt-g{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;font-weight:600;color:var(--gold);width:54px;text-align:right}
 
-/* MAP */
-.map-wrap{margin-top:2.5rem;position:relative}
-#worldmap{width:100%;overflow:hidden}
-.map-legend{display:flex;gap:2rem;margin-top:1.2rem;flex-wrap:wrap}
-.leg-item{display:flex;align-items:center;gap:.5rem;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;color:var(--muted)}
-.leg-dot{width:12px;height:12px;border-radius:50%}
+/* MARKETS */
+#markets h2{color:var(--gd)}
+.map-wrap{margin-top:2rem;background:var(--cr2);padding:1.5rem}
+#worldmap{width:100%}
+.map-leg{display:flex;gap:2rem;margin-top:1.1rem;flex-wrap:wrap}
+.leg-i{display:flex;align-items:center;gap:.5rem;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;color:var(--mu)}
+.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 
 /* ALLOCATION */
-.alloc-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2.5rem}
-.alloc-bars{display:flex;flex-direction:column;gap:1rem}
-.ab-row{display:flex;align-items:center;gap:1rem}
-.ab-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--muted);width:110px;flex-shrink:0}
-.ab-track{flex:1;height:8px;background:var(--cream3)}
+.alloc-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2.5rem}
+.ab-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.ab-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--mu);width:118px;flex-shrink:0}
+.ab-track{flex:1;height:7px;background:var(--cr3)}
 .ab-fill{height:100%}
-.ab-pct{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;font-weight:500;color:var(--grn);width:48px;text-align:right}
-.alloc-text h3{margin-bottom:.75rem}
-.alloc-text p{font-size:.88rem;margin-bottom:1rem;font-family:'Helvetica Neue',Arial,sans-serif}
-.tier-chips{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem}
-.tier-chip{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:var(--cream2)}
-.tc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.tc-text{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--med)}
-.tc-roi{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--gold2);margin-left:auto;font-weight:500}
+.ab-pct{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;font-weight:500;color:var(--gm);width:54px;text-align:right}
+.chips{display:flex;flex-direction:column;gap:.45rem;margin-top:1.5rem}
+.chip{display:flex;align-items:center;gap:.75rem;padding:.58rem .85rem;background:var(--cr2)}
+.chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.chip-txt{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:var(--md);flex:1}
+.chip-roi{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:var(--gold2);font-weight:500}
 
-/* CASE STUDIES */
-.cases-bg{background:var(--cream2)}
-.cases-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2.5rem}
-.case-card{background:var(--cream);padding:2rem 1.5rem;border-top:2px solid var(--gold)}
-.case-num{font-size:3rem;font-weight:400;color:var(--grn3);line-height:1;font-family:Georgia,serif;margin-bottom:.3rem}
-.case-country{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:.75rem}
-.case-desc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--muted);line-height:1.6}
-.case-src{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;color:var(--cream3);margin-top:.75rem;color:var(--muted);opacity:.6}
+/* RETURNS */
+#returns{background:var(--cr2)}
+.ret-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2.5rem}
+.ret-card{background:var(--gd);padding:2.2rem 1.8rem;border-top:2px solid var(--gold)}
+.ret-num{font-size:3.4rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif;margin-bottom:.2rem}
+.ret-country{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,169,106,.7);margin-bottom:.8rem;display:block}
+.ret-desc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.65}
+.ret-src{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;color:rgba(255,255,255,.25);margin-top:.75rem;font-style:italic}
 
 /* STRATEGY */
 .strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2.5rem}
-.strat-card{background:var(--cream2);padding:2.5rem 2rem}
-.strat-card.dark{background:var(--grn);color:#fff}
-.s-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.15em;color:var(--gold2);margin-bottom:.5rem;display:block}
-.strat-card.dark .s-num{color:var(--gold)}
-.s-pct{font-size:2.4rem;font-weight:400;color:var(--grn3);margin-bottom:.2rem;font-family:Georgia,serif}
-.strat-card.dark .s-pct{color:var(--gold)}
-.s-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;font-weight:500;color:var(--grn3);margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:.08em}
-.strat-card.dark .s-head{color:#fff}
-.s-row{padding:.5rem 0;border-bottom:0.5px solid rgba(0,0,0,.06);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem}
-.strat-card.dark .s-row{border-color:rgba(255,255,255,.1)}
-.s-row-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold2);margin-bottom:.15rem;display:block}
-.strat-card.dark .s-row-lbl{color:var(--gold)}
-.s-row-val{color:var(--med);font-size:.82rem}
-.strat-card.dark .s-row-val{color:rgba(255,255,255,.7)}
+.sc{background:var(--cr2);padding:2.8rem 2.2rem}
+.sc.feat{background:var(--gm)}
+.sc-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.62rem;letter-spacing:.16em;color:var(--gold2);margin-bottom:.35rem;display:block}
+.sc.feat .sc-num{color:var(--gold)}
+.sc-pct{font-size:2.6rem;font-weight:400;color:var(--gd);margin-bottom:.1rem;font-family:Georgia,serif}
+.sc.feat .sc-pct{color:var(--gold)}
+.sc-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;font-weight:500;color:var(--gd);margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.1em}
+.sc.feat .sc-head{color:#fff}
+.sc-row{padding:.55rem 0;border-bottom:0.5px solid rgba(0,0,0,.06)}
+.sc.feat .sc-row{border-color:rgba(255,255,255,.1)}
+.sc-row:last-child{border-bottom:none}
+.sc-rl{font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold2);margin-bottom:.18rem;display:block;font-family:'Helvetica Neue',Arial,sans-serif}
+.sc.feat .sc-rl{color:var(--gold)}
+.sc-rv{color:var(--md);font-size:.82rem;font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.5}
+.sc.feat .sc-rv{color:rgba(255,255,255,.62)}
 
-/* WHY US */
+/* WHY */
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2.5rem}
-.why-card{background:var(--cream2);padding:2rem 1.5rem}
-.why-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:2rem;font-weight:400;color:var(--gold2);line-height:1;margin-bottom:.75rem;font-family:Georgia,serif}
-.why-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--grn);margin-bottom:.75rem}
-.why-body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--muted);line-height:1.65}
+.wc{background:var(--cr2);padding:2.2rem 1.8rem}
+.wc-num{font-size:2.4rem;font-weight:400;color:var(--gold2);line-height:1;margin-bottom:.75rem;font-family:Georgia,serif}
+.wc-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--gm);margin-bottom:.75rem}
+.wc-body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--mu);line-height:1.7}
+
+/* TEAM */
+#team{background:var(--cr)}
+.team-center{max-width:680px;margin:2.5rem auto 0;text-align:center}
+.team-photo{width:128px;height:128px;border-radius:50%;background:var(--gm);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;font-weight:400;color:var(--gold);font-family:Georgia,serif;letter-spacing:.05em}
+.team-name{font-size:1.6rem;font-weight:400;color:var(--gd);margin-bottom:.35rem}
+.team-title{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:var(--mu);letter-spacing:.08em;margin-bottom:.25rem}
+.team-loc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;color:var(--gold2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.team-rule{width:40px;height:1px;background:var(--gold2);margin:0 auto 1.5rem}
+.team-creds{list-style:none;margin-bottom:1.5rem;text-align:left;display:inline-block}
+.team-creds li{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.84rem;color:var(--md);line-height:1.7;padding:.25rem 0;padding-left:1rem;position:relative}
+.team-creds li::before{content:"·";position:absolute;left:0;color:var(--gold2)}
+.team-bio{font-size:.9rem;color:var(--md);line-height:1.8;text-align:center;font-style:italic}
 
 /* FUND STRUCTURE */
-.fund-bg{background:var(--grn3)}
-.fund-bg h2,.fund-bg .label{color:#fff}
-.fund-bg .label{color:rgba(200,169,106,.7)}
+#fund{background:var(--gd);padding:5rem 0}
+#fund h2{color:#fff}
+#fund .lbl{color:rgba(200,169,106,.7)}
 .fund-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2.5rem}
-.fund-card{background:rgba(255,255,255,.04);padding:2.5rem 2rem;border-top:1px solid rgba(200,169,106,.3)}
-.fund-val{font-size:2.8rem;font-weight:400;color:var(--gold);font-family:Georgia,serif;line-height:1;margin-bottom:.3rem}
-.fund-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5);margin-bottom:.75rem}
-.fund-body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.65}
+.fc{background:rgba(255,255,255,.04);padding:2.5rem 2rem;border-top:1px solid rgba(200,169,106,.28)}
+.fc-val{font-size:2.9rem;font-weight:400;color:var(--gold);font-family:Georgia,serif;line-height:1;margin-bottom:.25rem}
+.fc-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.65rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.38);margin-bottom:.75rem}
+.fc-body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.7}
 
 /* CONTACT */
+#contact{background:var(--cr)}
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:2.5rem;align-items:start}
-.contact-text h3{font-size:1.5rem;margin-bottom:1rem;font-weight:400}
-.contact-text p{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
-.c-detail{display:flex;flex-direction:column;gap:.4rem;margin-top:1.5rem}
-.c-det-row{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:var(--muted)}
-.c-det-row strong{color:var(--grn);font-weight:500}
-.contact-form{display:flex;flex-direction:column;gap:1rem}
+.ct-text p{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;color:var(--mu);line-height:1.78;margin-bottom:1rem}
+.ct-detail{margin-top:1.5rem;display:flex;flex-direction:column;gap:.45rem}
+.ct-dr{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:var(--mu)}
+.ct-dr strong{color:var(--gm);font-weight:500}
+.cf{display:flex;flex-direction:column;gap:1rem}
 .cf-row{display:flex;flex-direction:column;gap:.3rem}
-.cf-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.cf-input{width:100%;padding:.7rem .85rem;border:0.5px solid var(--cream3);background:var(--cream2);color:var(--char);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;outline:none}
-.cf-input:focus{border-color:var(--gold2)}
+.cf-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
+.cf-inp{width:100%;padding:.72rem .9rem;border:0.5px solid var(--cr3);background:var(--cr2);color:var(--ch);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0}
+.cf-inp:focus{border-color:var(--gold2)}
 .cf-ta{min-height:100px;resize:vertical}
-.cf-submit{padding:.85rem 2.2rem;background:var(--grn);color:var(--gold);border:none;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;align-self:flex-start;font-weight:500}
-.cf-submit:hover{background:var(--grn2)}
+.cf-btn{padding:.9rem;background:var(--gm);color:var(--gold);border:none;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-weight:600;transition:background .2s;width:100%;border-radius:0}
+.cf-btn:hover{background:var(--gl)}
+.cf-msg{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.84rem;color:var(--gm);display:none;margin-top:.5rem;padding:.75rem;background:rgba(31,61,43,.08)}
 
 /* FOOTER */
-footer{background:var(--grn3);padding:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.ft-logo{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-.ft-disc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;color:rgba(255,255,255,.3);max-width:500px;line-height:1.5}
+footer{background:var(--gd);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem}
+.ft-logo{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.ft-disc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.64rem;color:rgba(255,255,255,.26);max-width:560px;line-height:1.6}
 
-@media(max-width:700px){
-.thesis-grid,.strat-grid,.why-grid,.fund-grid,.cases-grid{grid-template-columns:1fr}
-.gap-layout,.alloc-layout,.contact-layout{grid-template-columns:1fr}
-.hero{flex-direction:column}.hero-right{min-height:200px}
-.hero-kpis{flex-wrap:wrap;gap:1.5rem}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .thesis-grid,.strat-grid,.why-grid,.fund-grid,.ret-grid{grid-template-columns:1fr 1fr}
+  .alpha-layout,.alloc-layout,.contact-layout{grid-template-columns:1fr;gap:2.5rem}
+  .why-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  #hero{flex-direction:column}
+  .hero-l{padding:3.5rem 1.5rem}
+  .hero-r{min-height:220px}
+  .hero-kpis{gap:1.5rem}
+  .hero-btns{flex-direction:column;gap:.75rem}
+  .btn-gold,.btn-ghost{text-align:center}
+  .thesis-grid,.strat-grid,.why-grid,.fund-grid,.ret-grid{grid-template-columns:1fr}
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:flex}
+  .inner{padding:0 1.5rem}
+  section{padding:3.5rem 0}
+  nav{padding:.9rem 1.5rem}
+  footer{padding:1.5rem}
+  .gap-big{font-size:4rem}
+  .hero-big{font-size:3.8rem}
 }
 </style>
+</head>
+<body>
 
-<nav>
+<nav id="main-nav">
   <span class="nav-logo">Global Land Alpha Fund &nbsp;I</span>
   <div class="nav-links">
-    <a href="#">Thesis</a>
-    <a href="#">Markets</a>
-    <a href="#">Strategy</a>
-    <a href="#">Contact</a>
+    <a href="#thesis">Thesis</a>
+    <a href="#alpha">Alpha Gap</a>
+    <a href="#markets">Markets</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
   </div>
+  <a href="#contact" class="nav-cta">Request Info</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#thesis">Thesis</a>
+  <a href="#alpha">Alpha Gap</a>
+  <a href="#markets">Markets</a>
+  <a href="#strategy">Strategy</a>
+  <a href="#team">Team</a>
+  <a href="#contact">Contact</a>
+</div>
 
-<section class="hero">
-  <div class="hero-left">
+<section id="hero">
+  <div class="hero-l">
     <div class="hero-grid"></div>
     <span class="hero-tag">Armenia-based &nbsp;·&nbsp; Global mandate &nbsp;·&nbsp; March 2026</span>
     <h1>Capturing value<br>where growth<br><em>begins.</em></h1>
-    <p class="hero-sub">A structured, data-driven land investment fund providing institutional access to raw land opportunities across 10+ high-growth global markets.</p>
+    <p class="hero-sub">A structured, data-driven land investment fund providing institutional access to raw land opportunities across 10+ high-growth markets.</p>
     <div class="hero-kpis">
       <div><span class="kpi-val">15–20%</span><span class="kpi-lbl">Target IRR</span></div>
       <div><span class="kpi-val">2–3×</span><span class="kpi-lbl">Total return</span></div>
       <div><span class="kpi-val">7 yrs</span><span class="kpi-lbl">Horizon</span></div>
-      <div><span class="kpi-val">10+</span><span class="kpi-lbl">Markets</span></div>
     </div>
-    <button class="btn-primary" onclick="document.querySelector('.contact-form').scrollIntoView({behavior:'smooth'})">Request information</button>
-    <button class="btn-ghost" onclick="document.querySelector('.alpha-bg').scrollIntoView({behavior:'smooth'})">View research</button>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">Request information</a>
+      <a href="#alpha" class="btn-ghost">View research</a>
+    </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-circle1"></div>
-    <div class="hero-circle2"></div>
-    <div class="hero-stat-block">
+  <div class="hero-r">
+    <div class="h-c1"></div>
+    <div class="h-c2"></div>
+    <div class="h-c3"></div>
+    <div class="hero-stat">
       <div class="hero-big">+220%</div>
       <div class="hero-stat-lbl">Average alpha gap<br>index vs raw land &nbsp;·&nbsp; 2018–2025</div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="quote">
+  <div class="inner" style="text-align:center">
+    <div class="quote-rule"></div>
+    <p class="quote-text">"We invest where the infrastructure<br>is being built, not where it has<br>already arrived."</p>
+    <div class="quote-attr">— &nbsp;Arsen Harutyunyan &nbsp;·&nbsp; Founder &amp; Fund Manager</div>
+    <div class="quote-rule btm"></div>
+  </div>
+</section>
+
+<section id="thesis">
   <div class="inner">
-    <span class="label">Investment thesis</span>
-    <h2>We invest where three<br>forces converge.</h2>
+    <span class="lbl">Investment thesis</span>
+    <h2>We invest where three forces converge.</h2>
     <div class="thesis-grid">
-      <div class="thesis-card">
+      <div class="tc feat">
         <div class="tc-rule"></div>
         <span class="tc-num">01</span>
         <div class="tc-head">GDP per capita growth</div>
-        <p class="tc-body">Rising per-capita income creates end-buyer demand. We target markets with sustained 4%+ growth trajectories — where the population can afford what gets built on the land.</p>
+        <p class="tc-body">Rising income creates end-buyer demand. We target markets with sustained 4%+ growth trajectories — where the population can afford what gets built on the land.</p>
       </div>
-      <div class="thesis-card">
+      <div class="tc">
         <div class="tc-rule" style="background:var(--gold2)"></div>
         <span class="tc-num">02</span>
         <div class="tc-head">Tourism expansion</div>
         <p class="tc-body">External visitor demand reprices coastal and resort land independently of local income. Vietnam +19%, Georgia +7%, Saudi Arabia +8% — structural shifts, not cyclical bounces.</p>
       </div>
-      <div class="thesis-card">
+      <div class="tc">
         <div class="tc-rule" style="background:var(--gold2)"></div>
         <span class="tc-num">03</span>
         <div class="tc-head">Infrastructure buildout</div>
@@ -241,269 +322,286 @@ footer{background:var(--grn3);padding:2rem;display:flex;justify-content:space-be
   </div>
 </section>
 
-<section class="alpha-bg">
+<section id="alpha">
   <div class="inner">
-    <span class="label">The alpha gap</span>
-    <h2>The index shows what happened<br>to average built property.</h2>
-    <p class="alpha-intro">Raw land near a confirmed infrastructure catalyst is a different asset class. It has no yield drag, no depreciation, no maintenance cost. Every return comes from price appreciation.</p>
-    <div class="gap-layout">
+    <span class="lbl">The alpha gap</span>
+    <h2>The index shows what happened to average built property.</h2>
+    <p class="alpha-intro">Raw land near a confirmed infrastructure catalyst is a different asset class. No yield drag, no depreciation, no maintenance cost. Every return comes from price appreciation alone.</p>
+    <div class="alpha-layout">
       <div>
-        <div class="gap-stat-row">
-          <div class="gap-big">+220%</div>
-          <div class="gap-lbl">Average gap across 18 markets &nbsp;·&nbsp; 2018–2025</div>
-        </div>
-        <div class="bar-compare">
+        <div class="gap-big">+220%</div>
+        <div class="gap-lbl">Average gap across 18 markets<br>2018 to 2025</div>
+        <div class="bars">
           <div class="bar-row">
-            <span class="bar-label">Official index avg</span>
-            <div class="bar-track"><div class="bar-fill idx" style="width:22%"></div></div>
+            <span class="bar-lbl">Official index avg</span>
+            <div class="bar-track"><div class="b-idx"></div></div>
             <span class="bar-val">~80%</span>
           </div>
           <div class="bar-row">
-            <span class="bar-label">Raw land peak avg</span>
-            <div class="bar-track"><div class="bar-fill land" style="width:88%"></div></div>
+            <span class="bar-lbl">Raw land peak avg</span>
+            <div class="bar-track"><div class="b-land"></div></div>
             <span class="bar-val hi">~360%</span>
           </div>
         </div>
       </div>
-      <div class="market-table">
-        <div class="mt-row" style="border-top:0.5px solid rgba(255,255,255,.07)">
-          <span class="mt-market" style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Market</span>
-          <span class="mt-idx" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">Index</span>
-          <span class="mt-land" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)">Land peak</span>
-          <span class="mt-gap" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,169,106,.5)">Gap</span>
+      <div class="mkt-table">
+        <div class="mt-hdr">
+          <span style="flex:1">Market</span>
+          <span style="width:48px;text-align:center">Index</span>
+          <span style="width:48px;text-align:center">Land</span>
+          <span style="width:54px;text-align:right">Gap</span>
         </div>
-        <div class="mt-row"><span class="mt-market">Vietnam</span><span class="mt-idx">~100%</span><span class="mt-land">420%</span><span class="mt-gap">+320%</span></div>
-        <div class="mt-row"><span class="mt-market">UAE</span><span class="mt-idx">~95%</span><span class="mt-land">380%</span><span class="mt-gap">+285%</span></div>
-        <div class="mt-row"><span class="mt-market">Mexico</span><span class="mt-idx">~70%</span><span class="mt-land">400%</span><span class="mt-gap">+330%</span></div>
-        <div class="mt-row"><span class="mt-market">Georgia</span><span class="mt-idx">~120%</span><span class="mt-land">400%</span><span class="mt-gap">+280%</span></div>
-        <div class="mt-row"><span class="mt-market">Armenia</span><span class="mt-idx">~100%</span><span class="mt-land">320%</span><span class="mt-gap">+220%</span></div>
-        <div class="mt-row"><span class="mt-market">India</span><span class="mt-idx">~57%</span><span class="mt-land">310%</span><span class="mt-gap">+253%</span></div>
-        <div class="mt-row"><span class="mt-market">Saudi Arabia</span><span class="mt-idx">~40%</span><span class="mt-land">350%</span><span class="mt-gap">+310%</span></div>
+        <div class="mt-row"><span class="mt-m">Vietnam</span><span class="mt-i">~100%</span><span class="mt-l">420%</span><span class="mt-g">+320%</span></div>
+        <div class="mt-row"><span class="mt-m">UAE</span><span class="mt-i">~95%</span><span class="mt-l">380%</span><span class="mt-g">+285%</span></div>
+        <div class="mt-row"><span class="mt-m">Mexico</span><span class="mt-i">~70%</span><span class="mt-l">400%</span><span class="mt-g">+330%</span></div>
+        <div class="mt-row"><span class="mt-m">Georgia</span><span class="mt-i">~120%</span><span class="mt-l">400%</span><span class="mt-g">+280%</span></div>
+        <div class="mt-row"><span class="mt-m">Armenia</span><span class="mt-i">~100%</span><span class="mt-l">320%</span><span class="mt-g">+220%</span></div>
+        <div class="mt-row"><span class="mt-m">India</span><span class="mt-i">~57%</span><span class="mt-l">310%</span><span class="mt-g">+253%</span></div>
+        <div class="mt-row"><span class="mt-m">Saudi Arabia</span><span class="mt-i">~40%</span><span class="mt-l">350%</span><span class="mt-g">+310%</span></div>
+        <div style="margin-top:.75rem;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.65rem;color:rgba(255,255,255,.22);font-style:italic">Sources: JLL · REIDIN · CBRE · GeoStat · CBA RPPI · NHB RESIDEX · GASTAT · Colliers · Anarock</div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="markets">
   <div class="inner">
-    <span class="label">Global markets</span>
-    <h2>18 markets screened.<br>Four investment tiers.</h2>
-    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;color:var(--muted);max-width:520px;margin-top:.75rem">Evaluated across GDP growth, tourism momentum, infrastructure pipeline, legal access, FX stability, and entry valuation.</p>
+    <span class="lbl">Global markets</span>
+    <h2>18 markets screened. Four investment tiers.</h2>
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;color:var(--mu);max-width:500px;margin-top:-.5rem">Scored across GDP growth, tourism momentum, infrastructure pipeline, legal access, FX stability, and entry valuation.</p>
     <div class="map-wrap">
       <div id="worldmap"></div>
-      <div class="map-legend">
-        <div class="leg-item"><div class="leg-dot" style="background:#1F3D2B"></div>Tier 1 — Core growth</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#2A5239"></div>Tier 2 — Regional alpha</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#C8A96A"></div>Tier 3 — Stable / EU</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#2E4A62"></div>Tier 4 — High upside</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#D9D4CC"></div>Not invested</div>
+      <div class="map-leg">
+        <div class="leg-i"><div class="leg-dot" style="background:#1F3D2B"></div>Tier 1 — Core growth</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#2A5239"></div>Tier 2 — Regional alpha</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#C8A96A"></div>Tier 3 — Stable / EU</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#2E4A62"></div>Tier 4 — High upside</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#D8D2C8"></div>Not in portfolio</div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="allocation">
   <div class="inner">
-    <span class="label">Portfolio allocation</span>
-    <h2>Diversified by design.<br>Balanced for return.</h2>
+    <span class="lbl">Portfolio allocation</span>
+    <h2>Diversified by design. Balanced for return.</h2>
     <div class="alloc-layout">
-      <div class="alloc-bars">
-        <div class="ab-row">
-          <span class="ab-lbl">Core growth</span>
-          <div class="ab-track"><div class="ab-fill" style="width:45%;background:#1F3D2B"></div></div>
-          <span class="ab-pct">40–50%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">Regional alpha</span>
-          <div class="ab-track"><div class="ab-fill" style="width:27%;background:#2A5239"></div></div>
-          <span class="ab-pct">25–30%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">Stable / EU</span>
-          <div class="ab-track"><div class="ab-fill" style="width:27%;background:#C8A96A"></div></div>
-          <span class="ab-pct">25–30%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">High upside</span>
-          <div class="ab-track"><div class="ab-fill" style="width:8%;background:#2E4A62"></div></div>
-          <span class="ab-pct">0–10%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">Tactical</span>
-          <div class="ab-track"><div class="ab-fill" style="width:4%;background:#7A7A6A"></div></div>
-          <span class="ab-pct">0–5%</span>
-        </div>
+      <div>
+        <div class="ab-row"><span class="ab-lbl">Core growth</span><div class="ab-track"><div class="ab-fill" style="width:45%;background:#1F3D2B"></div></div><span class="ab-pct">40–50%</span></div>
+        <div class="ab-row"><span class="ab-lbl">Regional alpha</span><div class="ab-track"><div class="ab-fill" style="width:27%;background:#2A5239"></div></div><span class="ab-pct">25–30%</span></div>
+        <div class="ab-row"><span class="ab-lbl">Stable / EU</span><div class="ab-track"><div class="ab-fill" style="width:27%;background:#C8A96A"></div></div><span class="ab-pct">25–30%</span></div>
+        <div class="ab-row"><span class="ab-lbl">High upside</span><div class="ab-track"><div class="ab-fill" style="width:8%;background:#2E4A62"></div></div><span class="ab-pct">0–10%</span></div>
+        <div class="ab-row"><span class="ab-lbl">Tactical</span><div class="ab-track"><div class="ab-fill" style="width:4%;background:#6A6A5A"></div></div><span class="ab-pct">0–5%</span></div>
       </div>
-      <div class="alloc-text">
-        <h3>Conservative construction.<br>Maximum return per unit of risk.</h3>
-        <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;color:var(--muted);margin-top:.75rem;line-height:1.7">Core markets form the return engine. Regional alpha positions deliver our home-market edge. Stable EU markets anchor LP confidence. No single country exceeds 25% of fund value.</p>
-        <div class="tier-chips">
-          <div class="tier-chip"><div class="tc-dot" style="background:#1F3D2B"></div><span class="tc-text">India · Vietnam · UAE · Saudi Arabia</span><span class="tc-roi">100–400% 7Y</span></div>
-          <div class="tier-chip"><div class="tc-dot" style="background:#2A5239"></div><span class="tc-text">Georgia · Armenia</span><span class="tc-roi">80–320% 7Y</span></div>
-          <div class="tier-chip"><div class="tc-dot" style="background:#C8A96A"></div><span class="tc-text">Portugal · Spain · Cyprus · Chile</span><span class="tc-roi">35–80% 7Y</span></div>
-          <div class="tier-chip"><div class="tc-dot" style="background:#2E4A62"></div><span class="tc-text">Morocco · Albania · Mexico</span><span class="tc-roi">60–550% 7Y</span></div>
+      <div>
+        <h3 style="margin-bottom:.75rem;font-size:1.1rem">Conservative construction.<br>Maximum return per unit of risk.</h3>
+        <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;color:var(--mu);line-height:1.75;margin-top:.75rem;margin-bottom:1.5rem">No single country exceeds 25% of fund value. Min 20% in Tier 3 stability markets at all times. Infrastructure delays in one market cannot destroy fund-level returns.</p>
+        <div class="chips">
+          <div class="chip"><div class="chip-dot" style="background:#1F3D2B"></div><span class="chip-txt">India · Vietnam · UAE · Saudi Arabia</span><span class="chip-roi">100–400% 7Y</span></div>
+          <div class="chip"><div class="chip-dot" style="background:#2A5239"></div><span class="chip-txt">Georgia · Armenia</span><span class="chip-roi">80–320% 7Y</span></div>
+          <div class="chip"><div class="chip-dot" style="background:#C8A96A"></div><span class="chip-txt">Portugal · Spain · Cyprus · Chile</span><span class="chip-roi">35–80% 7Y</span></div>
+          <div class="chip"><div class="chip-dot" style="background:#2E4A62"></div><span class="chip-txt">Morocco · Albania · Mexico</span><span class="chip-roi">60–550% 7Y</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cases-bg">
+<section id="returns">
   <div class="inner">
-    <span class="label">Proven in the last 7 years</span>
+    <span class="lbl">Proven in the last 7 years</span>
     <h2>Documented raw land returns.<br>Sourced. Not modelled.</h2>
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-num">420%</div>
-        <div class="case-country">Vietnam</div>
-        <p class="case-desc">Industrial land in Long An province: VND 800k/m² → VND 4.2M/m² as Apple, Samsung, and Nike supply chains relocated from China.</p>
-        <div class="case-src">JLL Vietnam Industrial 2024</div>
+    <div class="ret-grid">
+      <div class="ret-card">
+        <div class="ret-num">420%</div>
+        <span class="ret-country">Vietnam</span>
+        <p class="ret-desc">Industrial land Long An: VND 800k → 4.2M/m² as Apple, Samsung &amp; Nike supply chains relocated from China.</p>
+        <div class="ret-src">JLL Vietnam Industrial 2024</div>
       </div>
-      <div class="case-card">
-        <div class="case-num">400%</div>
-        <div class="case-country">Mexico</div>
-        <p class="case-desc">Tulum tourism land: USD 30/m² → USD 180–350/m² on Maya Train corridor and luxury resort development wave.</p>
-        <div class="case-src">CBRE Mexico Industrial 2024</div>
+      <div class="ret-card">
+        <div class="ret-num">400%</div>
+        <span class="ret-country">Mexico</span>
+        <p class="ret-desc">Tulum tourism land: USD 30 → USD 350/m² on Maya Train corridor and luxury resort development wave.</p>
+        <div class="ret-src">CBRE Mexico Industrial 2024</div>
       </div>
-      <div class="case-card">
-        <div class="case-num">400%</div>
-        <div class="case-country">Georgia</div>
-        <p class="case-desc">Batumi boulevard-adjacent land: USD 80/m² → USD 400/m²+ driven by Gulf and EU capital inflow. Unrestricted foreign ownership.</p>
-        <div class="case-src">Colliers Georgia 2024</div>
+      <div class="ret-card">
+        <div class="ret-num">400%</div>
+        <span class="ret-country">Georgia</span>
+        <p class="ret-desc">Batumi boulevard: USD 80 → USD 400/m²+ driven by Gulf &amp; EU capital. Foreign land ownership unrestricted.</p>
+        <div class="ret-src">Colliers Georgia 2024</div>
       </div>
-      <div class="case-card">
-        <div class="case-num">320%</div>
-        <div class="case-country">Armenia</div>
-        <p class="case-desc">Yerevan Kentron district: AMD 200k/m² → AMD 700k/m²+ on Russian capital re-routing and IT sector growth. Secondary corridors remain mispriced.</p>
-        <div class="case-src">CBA RPPI Q4 2025</div>
+      <div class="ret-card">
+        <div class="ret-num">350%</div>
+        <span class="ret-country">Saudi Arabia</span>
+        <p class="ret-desc">Diriyah-adjacent Riyadh: SAR 500 → 2,800/m² 2021–2025. NEOM-adjacent Tabuk: ~5× from base.</p>
+        <div class="ret-src">JLL Saudi Arabia 2024</div>
+      </div>
+      <div class="ret-card">
+        <div class="ret-num">320%</div>
+        <span class="ret-country">Armenia</span>
+        <p class="ret-desc">Yerevan Kentron: AMD 200k → 700k/m²+ on Russian capital re-routing &amp; IT sector growth. Secondary corridors remain mispriced.</p>
+        <div class="ret-src">CBA RPPI Q4 2025</div>
+      </div>
+      <div class="ret-card">
+        <div class="ret-num">310%</div>
+        <span class="ret-country">India</span>
+        <p class="ret-desc">Hyderabad Outer Ring Road: ₹2,000 → ₹12,000/sqyd as road infrastructure delivered on schedule.</p>
+        <div class="ret-src">Anarock Research 2025</div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="strategy">
   <div class="inner">
-    <span class="label">Investment strategy</span>
-    <h2>Three strategies.<br>One logic.</h2>
-    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;color:var(--muted);max-width:480px;margin-top:.5rem;margin-bottom:0">Enter before the catalyst. Exit into the repricing.</p>
+    <span class="lbl">Investment strategy</span>
+    <h2>Three strategies. One logic.</h2>
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;color:var(--mu);margin-top:-.75rem;margin-bottom:0">Enter before the catalyst. Exit into the repricing.</p>
     <div class="strat-grid">
-      <div class="strat-card dark">
-        <span class="s-num">01</span>
-        <div class="s-pct">50%</div>
-        <div class="s-head">Infrastructure-led land</div>
-        <div class="s-row"><span class="s-row-lbl">Entry logic</span><span class="s-row-val">Acquire 18–36 months before airport, highway, or logistics hub delivery. Land prices in access before it exists.</span></div>
-        <div class="s-row" style="border-bottom:none"><span class="s-row-lbl">Exit buyers</span><span class="s-row-val">Developers · Logistics operators · Industrial REITs</span></div>
+      <div class="sc feat">
+        <span class="sc-num">01</span>
+        <div class="sc-pct">50%</div>
+        <div class="sc-head">Infrastructure-led land</div>
+        <div class="sc-row"><span class="sc-rl">Timing</span><span class="sc-rv">18–36 months before delivery</span></div>
+        <div class="sc-row"><span class="sc-rl">Approach</span><span class="sc-rv">Acquire near airports, highways, logistics parks before public pricing reflects access.</span></div>
+        <div class="sc-row"><span class="sc-rl">Exit buyers</span><span class="sc-rv">Developers · Logistics operators · REITs</span></div>
       </div>
-      <div class="strat-card">
-        <span class="s-num">02</span>
-        <div class="s-pct">30%</div>
-        <div class="s-head">Tourism corridor land</div>
-        <div class="s-row"><span class="s-row-lbl">Entry logic</span><span class="s-row-val">Coastal and resort land before international buyer pool arrives. Tourism compounds: 15% annual growth = 2× visitor base in 5 years.</span></div>
-        <div class="s-row" style="border-bottom:none"><span class="s-row-lbl">Exit buyers</span><span class="s-row-val">Hospitality groups · Villa developers · Second-home buyers</span></div>
+      <div class="sc">
+        <span class="sc-num">02</span>
+        <div class="sc-pct">30%</div>
+        <div class="sc-head">Tourism corridor land</div>
+        <div class="sc-row"><span class="sc-rl">Timing</span><span class="sc-rv">Before international buyer wave arrives</span></div>
+        <div class="sc-row"><span class="sc-rl">Approach</span><span class="sc-rv">Coastal and resort land as visitor numbers compound. 15% annual growth = 2× visitor base in 5 years.</span></div>
+        <div class="sc-row"><span class="sc-rl">Exit buyers</span><span class="sc-rv">Hospitality groups · Second-home buyers</span></div>
       </div>
-      <div class="strat-card">
-        <span class="s-num">03</span>
-        <div class="s-pct">20%</div>
-        <div class="s-head">Development-ready plots</div>
-        <div class="s-row"><span class="s-row-lbl">Entry logic</span><span class="s-row-val">Zoned or permit-ready land. Rezoning creates a valuation step-up captured at exit. Shorter 2–4 year cycle.</span></div>
-        <div class="s-row" style="border-bottom:none"><span class="s-row-lbl">Exit buyers</span><span class="s-row-val">Residential developers · Retail buyers · Commercial operators</span></div>
+      <div class="sc">
+        <span class="sc-num">03</span>
+        <div class="sc-pct">20%</div>
+        <div class="sc-head">Development-ready plots</div>
+        <div class="sc-row"><span class="sc-rl">Timing</span><span class="sc-rv">Zoned or permit-ready — faster cycle</span></div>
+        <div class="sc-row"><span class="sc-rl">Approach</span><span class="sc-rv">Rezoning creates a valuation step-up captured at exit. 2–4 year hold period.</span></div>
+        <div class="sc-row"><span class="sc-rl">Exit buyers</span><span class="sc-rv">Residential developers · Retail buyers</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="why">
   <div class="inner">
-    <span class="label">Why this fund</span>
+    <span class="lbl">Why this fund</span>
     <h2>Four structural advantages<br>no competitor can replicate.</h2>
     <div class="why-grid">
-      <div class="why-card">
-        <div class="why-num">01</div>
-        <div class="why-head">Regional edge</div>
-        <p class="why-body">Armenia-based. Deal flow in Georgia and Armenia requires local language, legal relationships, and cadastre navigation. No fund manager in London or Singapore can replicate this.</p>
+      <div class="wc">
+        <div class="wc-num">01</div>
+        <div class="wc-head">Regional edge</div>
+        <p class="wc-body">Armenia-based. Deal flow in Georgia and Armenia requires local language, legal relationships, and cadastre navigation no outside manager can replicate.</p>
       </div>
-      <div class="why-card">
-        <div class="why-num">02</div>
-        <div class="why-head">Proprietary screen</div>
-        <p class="why-body">18-country model scored across 5 weighted criteria — GDP growth, tourism, ROI potential, legal access, FX stability. Updated quarterly. Every deployment decision is anchored to data.</p>
+      <div class="wc">
+        <div class="wc-num">02</div>
+        <div class="wc-head">Proprietary screen</div>
+        <p class="wc-body">18-country model scored across 5 weighted criteria. Updated quarterly. Every deployment decision is anchored to data, not intuition.</p>
       </div>
-      <div class="why-card">
-        <div class="why-num">03</div>
-        <div class="why-head">Global mandate</div>
-        <p class="why-body">10+ markets across 4 tiers. No single-country bet. No single-strategy concentration. Infrastructure delays in one market cannot destroy fund-level returns.</p>
+      <div class="wc">
+        <div class="wc-num">03</div>
+        <div class="wc-head">Global mandate</div>
+        <p class="wc-body">10+ markets across 4 tiers. No single-country bet. Infrastructure delays in one market cannot destroy fund-level returns.</p>
       </div>
-      <div class="why-card">
-        <div class="why-num">04</div>
-        <div class="why-head">Aligned incentives</div>
-        <p class="why-body">2% management fee. 20% carry above preferred return. 80% of all profits to LPs before carry is earned. We do not earn performance fees until investors have been paid first.</p>
+      <div class="wc">
+        <div class="wc-num">04</div>
+        <div class="wc-head">Aligned incentives</div>
+        <p class="wc-body">2% management fee. 20% carry above preferred return. 80% of all profits to LPs before carry is earned. We earn when investors earn.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="fund-bg">
+<section id="team">
   <div class="inner">
-    <span class="label">Fund structure</span>
-    <h2>Institutional terms.<br>Transparent economics.</h2>
+    <span class="lbl">Fund manager</span>
+    <h2>The person behind the fund.</h2>
+    <div class="team-center">
+      <div class="team-photo">AH</div>
+      <div class="team-name">Arsen Harutyunyan</div>
+      <div class="team-title">Founder &amp; Fund Manager · Global Land Alpha Fund I</div>
+      <div class="team-loc">Yerevan, Armenia</div>
+      <div class="team-rule"></div>
+      <ul class="team-creds">
+        <li>Armenia-based operator with active regional deal network</li>
+        <li>Global land investment strategy across 10+ markets</li>
+        <li>Proprietary 18-country scoring model, updated quarterly</li>
+        <li>Direct access to Caucasus land corridors unavailable to outside capital</li>
+      </ul>
+      <p class="team-bio">Arsen brings a rare combination of regional access and global investment discipline. Based in Yerevan with active networks across Georgia, Armenia, and the broader Caucasus, he sources deals that international managers cannot reach — and structures them with institutional-grade rigour.</p>
+    </div>
+  </div>
+</section>
+
+<section id="fund">
+  <div class="inner">
+    <span class="lbl">Fund structure</span>
+    <h2>Institutional terms. Transparent economics.</h2>
     <div class="fund-grid">
-      <div class="fund-card">
-        <div class="fund-head">Target IRR</div>
-        <div class="fund-val">15–20%</div>
-        <p class="fund-body">Per annum, unlevered land-level return. Conservative base case using 55–65% capture of documented historical corridor returns.</p>
+      <div class="fc">
+        <div class="fc-head">Target IRR</div>
+        <div class="fc-val">15–20%</div>
+        <p class="fc-body">Per annum, unlevered land-level return. Conservative base case using 55–65% capture of documented historical corridor returns.</p>
       </div>
-      <div class="fund-card">
-        <div class="fund-head">Total return</div>
-        <div class="fund-val">2–3×</div>
-        <p class="fund-body">Over the 7-year fund horizon. Aggressive case supports 3.5–5× where Georgia and Armenia alpha positions perform at their documented ceiling.</p>
+      <div class="fc">
+        <div class="fc-head">Total return</div>
+        <div class="fc-val">2–3×</div>
+        <p class="fc-body">Over the 7-year fund horizon. Aggressive case supports 3.5–5× where alpha positions perform at documented ceiling.</p>
       </div>
-      <div class="fund-card">
-        <div class="fund-head">Fee structure</div>
-        <div class="fund-val">2 / 20</div>
-        <p class="fund-body">2% management fee per annum. 20% performance fee above 0–6% preferred return hurdle. 80/20 LP/GP split. No deal-level promotes. No hidden charges.</p>
+      <div class="fc">
+        <div class="fc-head">Fee structure</div>
+        <div class="fc-val">2 / 20</div>
+        <p class="fc-body">2% management fee per annum. 20% carry above 0–6% preferred return hurdle. 80/20 LP/GP split. No hidden charges.</p>
       </div>
-      <div class="fund-card">
-        <div class="fund-head">Fund size</div>
-        <div class="fund-val">$2–5M</div>
-        <p class="fund-body">Initial close, expandable to $10M. Minimum ticket $50,000. Quarterly capital drawdown as deals close. Target first close Q2 2026.</p>
+      <div class="fc">
+        <div class="fc-head">Minimum ticket</div>
+        <div class="fc-val">$50K</div>
+        <p class="fc-body">For qualified investors and family offices. Quarterly capital drawdown as deals close. Target first close Q2 2026.</p>
       </div>
-      <div class="fund-card">
-        <div class="fund-head">Fund life</div>
-        <div class="fund-val">7 yrs</div>
-        <p class="fund-body">With optional 1-year extension. Longer horizon allows infrastructure to fully mature and second appreciation legs to be captured in alpha markets.</p>
+      <div class="fc">
+        <div class="fc-head">Fund life</div>
+        <div class="fc-val">7 yrs</div>
+        <p class="fc-body">With optional 1-year extension. Longer horizon captures infrastructure maturation and second appreciation legs in alpha markets.</p>
       </div>
-      <div class="fund-card">
-        <div class="fund-head">Geography</div>
-        <div class="fund-val">10+</div>
-        <p class="fund-body">Countries across Asia, MENA, Caucasus, EU, and Latin America. Max 25% per country. Min 20% in Tier 3 stability markets at all times.</p>
+      <div class="fc">
+        <div class="fc-head">Markets</div>
+        <div class="fc-val">10+</div>
+        <p class="fc-body">Across Asia, MENA, Caucasus, EU, and Latin America. Max 25% per country. Min 20% in Tier 3 stability markets at all times.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="contact">
   <div class="inner">
-    <span class="label">Contact</span>
-    <h2>Land is where value<br>creation begins.</h2>
+    <span class="lbl">Contact</span>
+    <h2>Land is where value creation begins.</h2>
     <div class="contact-layout">
-      <div class="contact-text">
+      <div class="ct-text">
         <p>We are currently accepting enquiries from qualified investors, family offices, and institutional allocators for the first close of Global Land Alpha Fund I.</p>
         <p>Minimum ticket: $50,000. Target first close: Q2 2026.</p>
-        <div class="c-detail">
-          <div class="c-det-row"><strong>Fund manager</strong> &nbsp;Arsen Harutyunyan</div>
-          <div class="c-det-row"><strong>Domicile</strong> &nbsp;Yerevan, Armenia</div>
-          <div class="c-det-row"><strong>Mandate</strong> &nbsp;Global · 10+ markets</div>
-          <div class="c-det-row"><strong>Status</strong> &nbsp;Raising · Q1–Q2 2026</div>
+        <div class="ct-detail">
+          <div class="ct-dr"><strong>Fund manager</strong> &nbsp; Arsen Harutyunyan</div>
+          <div class="ct-dr"><strong>Domicile</strong> &nbsp; Yerevan, Armenia</div>
+          <div class="ct-dr"><strong>Mandate</strong> &nbsp; Global · 10+ markets</div>
+          <div class="ct-dr"><strong>Status</strong> &nbsp; Raising · Q1–Q2 2026</div>
+          <div class="ct-dr"><strong>Website</strong> &nbsp; arsen-maker.github.io/land-fund</div>
         </div>
       </div>
       <div>
-        <div class="contact-form">
-          <div class="cf-row"><label class="cf-lbl">Full name</label><input class="cf-input" type="text" placeholder="Your name"></div>
-          <div class="cf-row"><label class="cf-lbl">Organisation</label><input class="cf-input" type="text" placeholder="Fund, family office, or firm"></div>
-          <div class="cf-row"><label class="cf-lbl">Email address</label><input class="cf-input" type="email" placeholder="your@email.com"></div>
-          <div class="cf-row"><label class="cf-lbl">Investment capacity (USD)</label><input class="cf-input" type="text" placeholder="e.g. $100,000–$500,000"></div>
-          <div class="cf-row"><label class="cf-lbl">Message</label><textarea class="cf-input cf-ta" placeholder="What would you like to know about the fund?"></textarea></div>
-          <button class="cf-submit">Request information</button>
-        </div>
+        <form class="cf" id="contact-form">
+          <div class="cf-row"><label class="cf-lbl">Full name</label><input class="cf-inp" type="text" placeholder="Your name" required></div>
+          <div class="cf-row"><label class="cf-lbl">Organisation</label><input class="cf-inp" type="text" placeholder="Fund, family office, or firm"></div>
+          <div class="cf-row"><label class="cf-lbl">Email address</label><input class="cf-inp" type="email" placeholder="your@email.com" required></div>
+          <div class="cf-row"><label class="cf-lbl">Investment capacity (USD)</label><input class="cf-inp" type="text" placeholder="e.g. $100,000–$500,000"></div>
+          <div class="cf-row"><label class="cf-lbl">Message</label><textarea class="cf-inp cf-ta" placeholder="What would you like to know about the fund?"></textarea></div>
+          <button type="submit" class="cf-btn">Request information</button>
+          <div class="cf-msg" id="cf-msg">Thank you — we will be in touch shortly.</div>
+        </form>
       </div>
     </div>
   </div>
@@ -517,59 +615,57 @@ footer{background:var(--grn3);padding:2rem;display:flex;justify-content:space-be
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
-const TIER_COLORS = {
-  '356':'#1F3D2B','704':'#1F3D2B','356':'#1F3D2B','682':'#1F3D2B','784':'#1F3D2B',
-  '704':'#1F3D2B',
-  '268':'#2A5239','051':'#2A5239',
-  '620':'#C8A96A','724':'#C8A96A','196':'#C8A96A','152':'#C8A96A','392':'#C8A96A','620':'#C8A96A',
-  '504':'#2E4A62','008':'#2E4A62','484':'#2E4A62','860':'#2E4A62',
+document.getElementById('nav-toggle').addEventListener('click',function(){
+  var m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-menu a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('mobile-menu').classList.remove('open');
+  });
+});
+
+document.getElementById('contact-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var msg=document.getElementById('cf-msg');
+  msg.style.display='block';
+  this.reset();
+  setTimeout(function(){msg.style.display='none';},6000);
+});
+
+var TIER={
+  356:'#1F3D2B',784:'#1F3D2B',682:'#1F3D2B',704:'#1F3D2B',
+  268:'#2A5239',51:'#2A5239',
+  620:'#C8A96A',724:'#C8A96A',196:'#C8A96A',152:'#C8A96A',392:'#C8A96A',
+  504:'#2E4A62',8:'#2E4A62',484:'#2E4A62',860:'#2E4A62'
 };
 
-const TIER_MAP = {
-  356:'#1F3D2B',
-  784:'#1F3D2B',
-  682:'#1F3D2B',
-  704:'#1F3D2B',
-  268:'#2A5239',
-  51:'#2A5239',
-  620:'#C8A96A',
-  724:'#C8A96A',
-  196:'#C8A96A',
-  152:'#C8A96A',
-  392:'#C8A96A',
-  504:'#2E4A62',
-  8:'#2E4A62',
-  484:'#2E4A62',
-  860:'#2E4A62',
-};
-
-const isDark = matchMedia('(prefers-color-scheme:dark)').matches;
-const landColor = isDark ? '#2A2A2A' : '#D9D4CC';
-const strokeColor = isDark ? '#1A1A1A' : '#F5F3EF';
-
-const container = document.getElementById('worldmap');
-const svg = d3.select('#worldmap').append('svg')
+var container=document.getElementById('worldmap');
+var svg=d3.select('#worldmap').append('svg')
   .attr('viewBox','0 0 960 500')
   .attr('width','100%')
   .style('display','block');
 
-const projection = d3.geoNaturalEarth1().scale(153).translate([480,250]);
-const path = d3.geoPath(projection);
+var proj=d3.geoNaturalEarth1().scale(153).translate([480,250]);
+var path=d3.geoPath(proj);
 
-d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
-  const countries = topojson.feature(world, world.objects.countries);
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world){
   svg.selectAll('path')
-    .data(countries.features)
+    .data(topojson.feature(world,world.objects.countries).features)
     .join('path')
-    .attr('d', path)
-    .attr('fill', d => TIER_MAP[+d.id] || landColor)
-    .attr('stroke', strokeColor)
-    .attr('stroke-width', 0.4);
-}).catch(() => {
-  svg.append('text').attr('x',480).attr('y',250)
+    .attr('d',path)
+    .attr('fill',function(d){return TIER[+d.id]||'#D8D2C8';})
+    .attr('stroke','#F5F3EF')
+    .attr('stroke-width',0.4);
+}).catch(function(){
+  svg.append('text')
+    .attr('x',480).attr('y',260)
     .attr('text-anchor','middle')
-    .attr('fill','#7A7A6A')
-    .attr('font-size','14')
-    .text('Map loading — check connection');
+    .attr('fill','#6A6A5A')
+    .attr('font-size',14)
+    .attr('font-family','Helvetica Neue, Arial, sans-serif')
+    .text('Map loading — check your internet connection');
 });
 </script>
+</body>
+</html>
