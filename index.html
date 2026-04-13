@@ -1,577 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Land Alpha Fund I</title>
+  <style>
+    :root {
+      --green-dark: #162D1F;
+      --green-mid: #1F3D2B;
+      --green-light: #2A5239;
+      --gold: #C8A96A;
+      --gold-dark: #A8854A;
+      --cream: #F5F3EF;
+      --cream-2: #EDE9E1;
+      --cream-3: #D8D2C8;
+      --charcoal: #1A1A1A;
+      --medium: #3A3A3A;
+      --muted: #6A6A5A;
+      --white: rgba(255,255,255,0.95);
+      --white-soft: rgba(255,255,255,0.72);
+      --white-faint: rgba(255,255,255,0.14);
+      --container: 1240px;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(22,45,31,0.05);
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --grn:#1F3D2B;--grn2:#2A5239;--grn3:#162D1F;
-  --gold:#C8A96A;--gold2:#A8854A;
-  --cream:#F5F3EF;--cream2:#EDE9E1;--cream3:#E3DDD5;
-  --char:#1A1A1A;--med:#3A3A3A;--muted:#7A7A6A;
-  --blue:#2E4A62;
-}
-body{font-family:Georgia,serif;background:var(--cream);color:var(--char)}
-section{padding:5rem 0;border-bottom:0.5px solid var(--cream3)}
-.inner{max-width:1080px;margin:0 auto;padding:0 2rem}
-.label{font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.2rem;display:block}
-h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:400;line-height:1.1;color:var(--grn3)}
-h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;color:var(--grn3);line-height:1.2}
-h3{font-size:1.1rem;font-weight:500;color:var(--grn3);font-family:'Helvetica Neue',Arial,sans-serif}
-p{font-size:1rem;color:var(--med);line-height:1.75}
-.gold{color:var(--gold2)}
-.grn{color:var(--grn)}
-.sans{font-family:'Helvetica Neue',Arial,sans-serif}
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
 
-/* NAV */
-nav{background:var(--grn3);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
-.nav-links{display:flex;gap:2rem}
-.nav-links a{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none}
-.nav-links a:hover{color:var(--gold)}
+    .label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 18px;
+      display: inline-block;
+    }
 
-/* HERO */
-.hero{background:var(--grn3);padding:0;border:none;min-height:520px;display:flex;align-items:stretch}
-.hero-left{flex:1;padding:5rem 3rem 5rem 2.5rem;max-width:580px;position:relative}
-.hero-grid{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 60px)}
-.hero-tag{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:block}
-.hero h1{color:#fff;font-size:clamp(2.2rem,4.5vw,3.5rem);margin-bottom:1.2rem}
-.hero h1 em{color:var(--gold);font-style:normal}
-.hero-sub{font-size:1rem;color:rgba(255,255,255,.62);line-height:1.7;max-width:420px;margin-bottom:2.5rem;font-family:'Helvetica Neue',Arial,sans-serif}
-.hero-kpis{display:flex;gap:2.5rem;margin-bottom:2.5rem}
-.kpi-val{font-family:'Helvetica Neue',Arial,sans-serif;font-size:1.9rem;font-weight:500;color:var(--gold);display:block;line-height:1}
-.kpi-lbl{font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem;display:block}
-.btn-primary{display:inline-block;padding:.75rem 2rem;background:var(--gold);color:var(--grn3);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;text-decoration:none;border:none;cursor:pointer}
-.btn-ghost{display:inline-block;padding:.75rem 2rem;border:0.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;margin-left:1rem;cursor:pointer;background:transparent}
-.hero-right{flex:1;background:var(--grn2);display:flex;align-items:center;justify-content:center;padding:3rem;position:relative;overflow:hidden}
-.hero-circle1{position:absolute;width:320px;height:320px;border-radius:50%;border:0.5px solid rgba(200,169,106,.15);top:50%;left:50%;transform:translate(-50%,-50%)}
-.hero-circle2{position:absolute;width:220px;height:220px;border-radius:50%;border:0.5px solid rgba(200,169,106,.2);top:50%;left:50%;transform:translate(-50%,-50%)}
-.hero-stat-block{text-align:center;position:relative;z-index:2}
-.hero-big{font-size:4.5rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif}
-.hero-stat-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:.5rem}
+    .section {
+      padding: 108px 0;
+      position: relative;
+    }
 
-/* THESIS */
-.thesis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
-.thesis-card{background:var(--cream2);padding:2.5rem 2rem;position:relative}
-.thesis-card:first-child{background:var(--grn);color:#fff}
-.tc-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;color:var(--gold2);letter-spacing:.15em;margin-bottom:1rem;display:block}
-.thesis-card:first-child .tc-num{color:var(--gold)}
-.tc-head{font-size:1.3rem;font-weight:400;margin-bottom:.75rem;color:var(--grn3)}
-.thesis-card:first-child .tc-head{color:#fff}
-.tc-body{font-size:.88rem;color:var(--muted);line-height:1.65;font-family:'Helvetica Neue',Arial,sans-serif}
-.thesis-card:first-child .tc-body{color:rgba(255,255,255,.62)}
-.tc-rule{width:28px;height:2px;background:var(--gold);margin-bottom:1rem}
+    .section-tight { padding: 88px 0; }
 
-/* ALPHA GAP */
-.alpha-bg{background:var(--grn3)}
-.alpha-bg h2{color:#fff}
-.alpha-bg .label{color:rgba(200,169,106,.8)}
-.alpha-intro{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.95rem;color:rgba(255,255,255,.6);margin-bottom:2.5rem;max-width:520px;line-height:1.7}
-.gap-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.gap-stat-row{margin-bottom:3rem}
-.gap-big{font-size:5rem;font-weight:400;color:var(--gold);line-height:1;font-family:Georgia,serif}
-.gap-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.4rem}
-.bar-compare{margin-top:2rem}
-.bar-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
-.bar-label{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;color:rgba(255,255,255,.55);width:130px;flex-shrink:0}
-.bar-track{flex:1;height:10px;background:rgba(255,255,255,.08)}
-.bar-fill{height:100%;transition:width .6s}
-.bar-fill.idx{background:rgba(255,255,255,.22)}
-.bar-fill.land{background:var(--gold)}
-.bar-val{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;font-weight:500;width:60px;text-align:right;color:rgba(255,255,255,.7)}
-.bar-val.hi{color:var(--gold)}
-.market-table{margin-top:1rem}
-.mt-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:0.5px solid rgba(255,255,255,.07)}
-.mt-market{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:rgba(255,255,255,.6)}
-.mt-idx{font-size:.82rem;color:rgba(255,255,255,.4);font-family:'Helvetica Neue',Arial,sans-serif}
-.mt-land{font-size:.9rem;font-weight:500;color:rgba(255,255,255,.8);font-family:'Helvetica Neue',Arial,sans-serif}
-.mt-gap{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;font-weight:500;color:var(--gold)}
+    h1, h2, h3, .serif {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      margin: 0;
+    }
 
-/* MAP */
-.map-wrap{margin-top:2.5rem;position:relative}
-#worldmap{width:100%;overflow:hidden}
-.map-legend{display:flex;gap:2rem;margin-top:1.2rem;flex-wrap:wrap}
-.leg-item{display:flex;align-items:center;gap:.5rem;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;color:var(--muted)}
-.leg-dot{width:12px;height:12px;border-radius:50%}
+    h1 {
+      font-size: clamp(46px, 7vw, 78px);
+      color: #fff;
+      max-width: 12ch;
+    }
 
-/* ALLOCATION */
-.alloc-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2.5rem}
-.alloc-bars{display:flex;flex-direction:column;gap:1rem}
-.ab-row{display:flex;align-items:center;gap:1rem}
-.ab-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--muted);width:110px;flex-shrink:0}
-.ab-track{flex:1;height:8px;background:var(--cream3)}
-.ab-fill{height:100%}
-.ab-pct{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;font-weight:500;color:var(--grn);width:48px;text-align:right}
-.alloc-text h3{margin-bottom:.75rem}
-.alloc-text p{font-size:.88rem;margin-bottom:1rem;font-family:'Helvetica Neue',Arial,sans-serif}
-.tier-chips{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem}
-.tier-chip{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:var(--cream2)}
-.tc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.tc-text{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--med)}
-.tc-roi{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--gold2);margin-left:auto;font-weight:500}
+    h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      max-width: 14ch;
+    }
 
-/* CASE STUDIES */
-.cases-bg{background:var(--cream2)}
-.cases-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2.5rem}
-.case-card{background:var(--cream);padding:2rem 1.5rem;border-top:2px solid var(--gold)}
-.case-num{font-size:3rem;font-weight:400;color:var(--grn3);line-height:1;font-family:Georgia,serif;margin-bottom:.3rem}
-.case-country{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:.75rem}
-.case-desc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--muted);line-height:1.6}
-.case-src{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;color:var(--cream3);margin-top:.75rem;color:var(--muted);opacity:.6}
+    h3 {
+      font-size: 28px;
+    }
 
-/* STRATEGY */
-.strat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2.5rem}
-.strat-card{background:var(--cream2);padding:2.5rem 2rem}
-.strat-card.dark{background:var(--grn);color:#fff}
-.s-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.15em;color:var(--gold2);margin-bottom:.5rem;display:block}
-.strat-card.dark .s-num{color:var(--gold)}
-.s-pct{font-size:2.4rem;font-weight:400;color:var(--grn3);margin-bottom:.2rem;font-family:Georgia,serif}
-.strat-card.dark .s-pct{color:var(--gold)}
-.s-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;font-weight:500;color:var(--grn3);margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:.08em}
-.strat-card.dark .s-head{color:#fff}
-.s-row{padding:.5rem 0;border-bottom:0.5px solid rgba(0,0,0,.06);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem}
-.strat-card.dark .s-row{border-color:rgba(255,255,255,.1)}
-.s-row-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold2);margin-bottom:.15rem;display:block}
-.strat-card.dark .s-row-lbl{color:var(--gold)}
-.s-row-val{color:var(--med);font-size:.82rem}
-.strat-card.dark .s-row-val{color:rgba(255,255,255,.7)}
+    p { margin: 0; color: var(--medium); }
 
-/* WHY US */
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2.5rem}
-.why-card{background:var(--cream2);padding:2rem 1.5rem}
-.why-num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:2rem;font-weight:400;color:var(--gold2);line-height:1;margin-bottom:.75rem;font-family:Georgia,serif}
-.why-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--grn);margin-bottom:.75rem}
-.why-body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:var(--muted);line-height:1.65}
+    .gold { color: var(--gold); }
+    .rule {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.8;
+    }
 
-/* FUND STRUCTURE */
-.fund-bg{background:var(--grn3)}
-.fund-bg h2,.fund-bg .label{color:#fff}
-.fund-bg .label{color:rgba(200,169,106,.7)}
-.fund-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2.5rem}
-.fund-card{background:rgba(255,255,255,.04);padding:2.5rem 2rem;border-top:1px solid rgba(200,169,106,.3)}
-.fund-val{font-size:2.8rem;font-weight:400;color:var(--gold);font-family:Georgia,serif;line-height:1;margin-bottom:.3rem}
-.fund-head{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5);margin-bottom:.75rem}
-.fund-body{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.65}
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--gold);
+      color: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
 
-/* CONTACT */
-.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:2.5rem;align-items:start}
-.contact-text h3{font-size:1.5rem;margin-bottom:1rem;font-weight:400}
-.contact-text p{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
-.c-detail{display:flex;flex-direction:column;gap:.4rem;margin-top:1.5rem}
-.c-det-row{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.82rem;color:var(--muted)}
-.c-det-row strong{color:var(--grn);font-weight:500}
-.contact-form{display:flex;flex-direction:column;gap:1rem}
-.cf-row{display:flex;flex-direction:column;gap:.3rem}
-.cf-lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.cf-input{width:100%;padding:.7rem .85rem;border:0.5px solid var(--cream3);background:var(--cream2);color:var(--char);font-family:'Helvetica Neue',Arial,sans-serif;font-size:.88rem;outline:none}
-.cf-input:focus{border-color:var(--gold2)}
-.cf-ta{min-height:100px;resize:vertical}
-.cf-submit{padding:.85rem 2.2rem;background:var(--grn);color:var(--gold);border:none;font-family:'Helvetica Neue',Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;align-self:flex-start;font-weight:500}
-.cf-submit:hover{background:var(--grn2)}
+    .cta-btn:hover {
+      transform: translateY(-1px);
+      background: #d7b57b;
+    }
 
-/* FOOTER */
-footer{background:var(--grn3);padding:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.ft-logo{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-.ft-disc{font-family:'Helvetica Neue',Arial,sans-serif;font-size:.68rem;color:rgba(255,255,255,.3);max-width:500px;line-height:1.5}
+    .cta-outline {
+      background: transparent;
+      color: var(--gold);
+      border-color: rgba(200, 169, 106, 0.4);
+    }
 
-@media(max-width:700px){
-.thesis-grid,.strat-grid,.why-grid,.fund-grid,.cases-grid{grid-template-columns:1fr}
-.gap-layout,.alloc-layout,.contact-layout{grid-template-columns:1fr}
-.hero{flex-direction:column}.hero-right{min-height:200px}
-.hero-kpis{flex-wrap:wrap;gap:1.5rem}
-}
-</style>
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(22,45,31,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-<nav>
-  <span class="nav-logo">Global Land Alpha Fund &nbsp;I</span>
-  <div class="nav-links">
-    <a href="#">Thesis</a>
-    <a href="#">Markets</a>
-    <a href="#">Strategy</a>
-    <a href="#">Contact</a>
-  </div>
-</nav>
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 24px;
+    }
 
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-grid"></div>
-    <span class="hero-tag">Armenia-based &nbsp;·&nbsp; Global mandate &nbsp;·&nbsp; March 2026</span>
-    <h1>Capturing value<br>where growth<br><em>begins.</em></h1>
-    <p class="hero-sub">A structured, data-driven land investment fund providing institutional access to raw land opportunities across 10+ high-growth global markets.</p>
-    <div class="hero-kpis">
-      <div><span class="kpi-val">15–20%</span><span class="kpi-lbl">Target IRR</span></div>
-      <div><span class="kpi-val">2–3×</span><span class="kpi-lbl">Total return</span></div>
-      <div><span class="kpi-val">7 yrs</span><span class="kpi-lbl">Horizon</span></div>
-      <div><span class="kpi-val">10+</span><span class="kpi-lbl">Markets</span></div>
-    </div>
-    <button class="btn-primary" onclick="document.querySelector('.contact-form').scrollIntoView({behavior:'smooth'})">Request information</button>
-    <button class="btn-ghost" onclick="document.querySelector('.alpha-bg').scrollIntoView({behavior:'smooth'})">View research</button>
-  </div>
-  <div class="hero-right">
-    <div class="hero-circle1"></div>
-    <div class="hero-circle2"></div>
-    <div class="hero-stat-block">
-      <div class="hero-big">+220%</div>
-      <div class="hero-stat-lbl">Average alpha gap<br>index vs raw land &nbsp;·&nbsp; 2018–2025</div>
-    </div>
-  </div>
-</section>
+    .brand {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      line-height: 1.4;
+      flex: 0 0 auto;
+    }
 
-<section>
-  <div class="inner">
-    <span class="label">Investment thesis</span>
-    <h2>We invest where three<br>forces converge.</h2>
-    <div class="thesis-grid">
-      <div class="thesis-card">
-        <div class="tc-rule"></div>
-        <span class="tc-num">01</span>
-        <div class="tc-head">GDP per capita growth</div>
-        <p class="tc-body">Rising per-capita income creates end-buyer demand. We target markets with sustained 4%+ growth trajectories — where the population can afford what gets built on the land.</p>
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.9);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 0;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-toggle span,
+    .nav-toggle::before,
+    .nav-toggle::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      height: 1.5px;
+      background: #fff;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle span { top: 21px; }
+    .nav-toggle::before { top: 14px; }
+    .nav-toggle::after { top: 28px; }
+    .nav-toggle.active span { opacity: 0; }
+    .nav-toggle.active::before { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active::after { transform: translateY(-7px) rotate(-45deg); }
+
+    .hero {
+      padding: 0;
+      background: var(--green-dark);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: calc(100vh - 78px);
+    }
+
+    .hero-left,
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(52px, 6vw, 92px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-left {
+      background: var(--green-dark);
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .hero-right {
+      background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-tag {
+      color: var(--gold);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 28px;
+    }
+
+    .hero-subline {
+      color: var(--white-soft);
+      max-width: 520px;
+      margin-top: 24px;
+      font-size: 16px;
+    }
+
+    .hero-kpis {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(130px, 180px));
+      gap: 28px 36px;
+      margin-top: 48px;
+      margin-bottom: 40px;
+    }
+
+    .kpi-value {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 4vw, 58px);
+      line-height: 0.95;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .kpi-label {
+      color: rgba(255,255,255,0.86);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .hero-orbits {
+      position: absolute;
+      inset: 50%;
+      transform: translate(-50%, -50%);
+      width: min(540px, 86vw);
+      aspect-ratio: 1 / 1;
+      pointer-events: none;
+    }
+
+    .hero-orbits::before,
+    .hero-orbits::after,
+    .orbit-ring {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 0.5px solid rgba(200,169,106,0.28);
+      border-radius: 50%;
+    }
+
+    .hero-orbits::after { inset: 13%; }
+    .orbit-ring { inset: 26%; }
+
+    .hero-stat {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .hero-stat-value {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(64px, 10vw, 112px);
+      line-height: 0.9;
+      color: var(--gold);
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.82);
+      max-width: 280px;
+    }
+
+    .quote-section {
+      text-align: center;
+    }
+
+    .quote-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      gap: 34px;
+    }
+
+    .quote-text {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: clamp(34px, 4.8vw, 62px);
+      line-height: 1.14;
+      color: var(--green-mid);
+      max-width: 18ch;
+      margin: 0 auto;
+    }
+
+    .quote-attrib {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-dark);
+    }
+
+    .thesis-head,
+    .markets-head,
+    .strategy-head,
+    .why-head,
+    .contact-head {
+      display: grid;
+      gap: 20px;
+      margin-bottom: 42px;
+    }
+
+    .thesis-cards,
+    .strategy-cards,
+    .why-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--cream-3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .why-cards {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .card {
+      padding: 34px 28px 30px;
+      background: var(--cream-2);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 16px;
+      position: relative;
+    }
+
+    .card-dark {
+      background: var(--green-mid);
+      color: #fff;
+    }
+
+    .card-rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(168,133,74,0.48);
+      margin-bottom: 2px;
+    }
+
+    .card-dark .card-rule { background: rgba(200,169,106,0.72); }
+
+    .card-num {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      color: var(--gold-dark);
+      line-height: 1;
+    }
+
+    .card-dark .card-num { color: var(--gold); }
+
+    .card-head {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.08;
+      color: inherit;
+      max-width: 12ch;
+    }
+
+    .card-body,
+    .card-dark .card-body {
+      color: inherit;
+      opacity: 0.9;
+      font-size: 15px;
+    }
+
+    .alpha-gap {
+      background: var(--green-dark);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .alpha-grid {
+      display: grid;
+      gap: 28px;
+      text-align: center;
+    }
+
+    .alpha-numbers {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 36px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .alpha-side {
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+    }
+
+    .alpha-value {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(60px, 9vw, 106px);
+      line-height: 0.9;
+      color: #fff;
+    }
+
+    .alpha-side.right .alpha-value { color: var(--gold); }
+
+    .alpha-caption {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.72);
+      max-width: 240px;
+    }
+
+    .alpha-divider {
+      width: 1px;
+      height: 180px;
+      background: rgba(200,169,106,0.72);
+      justify-self: center;
+    }
+
+    .alpha-copy {
+      max-width: 830px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .alpha-actions {
+      margin-top: 8px;
+    }
+
+    .markets-wrap {
+      display: grid;
+      gap: 34px;
+    }
+
+    .markets-copy {
+      max-width: 720px;
+    }
+
+    .map-shell {
+      background: var(--cream-2);
+      border: 1px solid var(--cream-3);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    #world-map {
+      width: 100%;
+      min-height: 450px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 28px;
+      margin-top: 18px;
+      padding-left: 2px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--medium);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .legend-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+      flex: 0 0 11px;
+    }
+
+    .strategy-cards .card {
+      min-height: 220px;
+      justify-content: space-between;
+    }
+
+    .strategy-line {
+      color: var(--medium);
+      font-size: 16px;
+      max-width: 28ch;
+    }
+
+    .card-dark .strategy-line { color: rgba(255,255,255,0.88); }
+
+    .why-card {
+      background: var(--cream-2);
+      border: 1px solid var(--cream-3);
+      border-radius: 22px;
+      min-height: 260px;
+      padding: 28px 24px;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .why-num {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: 1;
+      color: var(--gold-dark);
+    }
+
+    .why-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      line-height: 1.08;
+      max-width: 10ch;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-copy {
+      display: grid;
+      gap: 24px;
+      max-width: 520px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: baseline;
+      border-bottom: 1px solid var(--cream-3);
+      padding-bottom: 12px;
+    }
+
+    .detail-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+    }
+
+    .detail-value {
+      color: var(--charcoal);
+      font-weight: 500;
+    }
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--cream-3);
+      border-radius: 26px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      border: 1px solid var(--cream-3);
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--gold-dark);
+      background: #fff;
+    }
+
+    .form-field textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border-radius: 14px;
+      border: 0;
+      padding: 16px 18px;
+      background: var(--green-dark);
+      color: var(--gold);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .form-success {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(31,61,43,0.08);
+      color: var(--green-dark);
+      border: 1px solid rgba(31,61,43,0.12);
+    }
+
+    .site-footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.78);
+      padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .footer-brand {
+      color: var(--gold);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      white-space: nowrap;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.58);
+      max-width: 760px;
+      justify-self: end;
+      text-align: right;
+    }
+
+    @media (max-width: 1080px) {
+      .why-cards { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid,
+      .hero-grid,
+      .thesis-cards,
+      .strategy-cards {
+        grid-template-columns: 1fr;
+      }
+      .hero-grid { min-height: auto; }
+      .hero-right { min-height: 420px; }
+      .alpha-divider { height: 120px; }
+    }
+
+    @media (max-width: 820px) {
+      .nav-toggle { display: inline-block; }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--green-dark);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 20px 20px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a,
+      .nav-links .cta-btn {
+        width: 100%;
+        justify-content: flex-start;
+        border-radius: 0;
+        padding: 14px 0;
+      }
+      .nav-links .cta-btn {
+        margin-top: 10px;
+        border-radius: 999px;
+        justify-content: center;
+      }
+      .alpha-numbers {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .alpha-divider {
+        width: 120px;
+        height: 1px;
+      }
+      .why-cards { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-copy { justify-self: start; text-align: left; }
+      .detail-row { grid-template-columns: 1fr; gap: 2px; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(var(--container), calc(100% - 28px)); }
+      .section { padding: 84px 0; }
+      .hero-left,
+      .hero-right { padding: 34px 24px; }
+      .hero-kpis { grid-template-columns: 1fr; gap: 20px; }
+      .contact-card { padding: 20px; }
+      .map-shell { padding: 14px; }
+      #world-map { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">Global Land Alpha Fund&nbsp; I</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#thesis">Thesis</a>
+        <a href="#markets">Markets</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="cta-btn">Request the IM</a>
       </div>
-      <div class="thesis-card">
-        <div class="tc-rule" style="background:var(--gold2)"></div>
-        <span class="tc-num">02</span>
-        <div class="tc-head">Tourism expansion</div>
-        <p class="tc-body">External visitor demand reprices coastal and resort land independently of local income. Vietnam +19%, Georgia +7%, Saudi Arabia +8% — structural shifts, not cyclical bounces.</p>
-      </div>
-      <div class="thesis-card">
-        <div class="tc-rule" style="background:var(--gold2)"></div>
-        <span class="tc-num">03</span>
-        <div class="tc-head">Infrastructure buildout</div>
-        <p class="tc-body">Airports, highways, and logistics hubs create a known future event. We map the pipeline and acquire before public pricing reflects delivery. Entry: 18–36 months before opening.</p>
-      </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<section class="alpha-bg">
-  <div class="inner">
-    <span class="label">The alpha gap</span>
-    <h2>The index shows what happened<br>to average built property.</h2>
-    <p class="alpha-intro">Raw land near a confirmed infrastructure catalyst is a different asset class. It has no yield drag, no depreciation, no maintenance cost. Every return comes from price appreciation.</p>
-    <div class="gap-layout">
-      <div>
-        <div class="gap-stat-row">
-          <div class="gap-big">+220%</div>
-          <div class="gap-lbl">Average gap across 18 markets &nbsp;·&nbsp; 2018–2025</div>
-        </div>
-        <div class="bar-compare">
-          <div class="bar-row">
-            <span class="bar-label">Official index avg</span>
-            <div class="bar-track"><div class="bar-fill idx" style="width:22%"></div></div>
-            <span class="bar-val">~80%</span>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-tag">Armenia-based · Global mandate · March 2026</div>
+          <h1>Capturing value where growth <span class="gold">begins.</span></h1>
+          <p class="hero-subline">A global land investment fund providing institutional access to early-cycle opportunities across 10+ markets.</p>
+          <div class="hero-kpis">
+            <div>
+              <div class="kpi-value">15–20%</div>
+              <div class="kpi-label">Target IRR</div>
+            </div>
+            <div>
+              <div class="kpi-value">2–3×</div>
+              <div class="kpi-label">Total return</div>
+            </div>
           </div>
-          <div class="bar-row">
-            <span class="bar-label">Raw land peak avg</span>
-            <div class="bar-track"><div class="bar-fill land" style="width:88%"></div></div>
-            <span class="bar-val hi">~360%</span>
+          <div>
+            <a class="cta-btn" href="#contact">Request the Information Memorandum</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-orbits"><div class="orbit-ring"></div></div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">+220%</div>
+            <div class="hero-stat-label">Average alpha gap · index vs raw land</div>
           </div>
         </div>
       </div>
-      <div class="market-table">
-        <div class="mt-row" style="border-top:0.5px solid rgba(255,255,255,.07)">
-          <span class="mt-market" style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)">Market</span>
-          <span class="mt-idx" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">Index</span>
-          <span class="mt-land" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)">Land peak</span>
-          <span class="mt-gap" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,169,106,.5)">Gap</span>
-        </div>
-        <div class="mt-row"><span class="mt-market">Vietnam</span><span class="mt-idx">~100%</span><span class="mt-land">420%</span><span class="mt-gap">+320%</span></div>
-        <div class="mt-row"><span class="mt-market">UAE</span><span class="mt-idx">~95%</span><span class="mt-land">380%</span><span class="mt-gap">+285%</span></div>
-        <div class="mt-row"><span class="mt-market">Mexico</span><span class="mt-idx">~70%</span><span class="mt-land">400%</span><span class="mt-gap">+330%</span></div>
-        <div class="mt-row"><span class="mt-market">Georgia</span><span class="mt-idx">~120%</span><span class="mt-land">400%</span><span class="mt-gap">+280%</span></div>
-        <div class="mt-row"><span class="mt-market">Armenia</span><span class="mt-idx">~100%</span><span class="mt-land">320%</span><span class="mt-gap">+220%</span></div>
-        <div class="mt-row"><span class="mt-market">India</span><span class="mt-idx">~57%</span><span class="mt-land">310%</span><span class="mt-gap">+253%</span></div>
-        <div class="mt-row"><span class="mt-market">Saudi Arabia</span><span class="mt-idx">~40%</span><span class="mt-land">350%</span><span class="mt-gap">+310%</span></div>
+    </section>
+
+    <section class="section quote-section">
+      <div class="container quote-wrap">
+        <div class="rule"></div>
+        <div class="quote-text">“We invest where the infrastructure is being built, not where it has already arrived.”</div>
+        <div class="quote-attrib">— Arsen Harutyunyan · Founder &amp; Fund Manager</div>
+        <div class="rule"></div>
       </div>
+    </section>
+
+    <section class="section" id="thesis">
+      <div class="container">
+        <div class="thesis-head">
+          <div class="label">Investment thesis</div>
+          <h2>We invest where three forces converge.</h2>
+        </div>
+        <div class="thesis-cards">
+          <article class="card card-dark">
+            <div class="card-rule"></div>
+            <div class="card-num">01</div>
+            <div class="card-head">GDP per capita growth</div>
+            <p class="card-body">We target markets where rising income creates end-buyer demand for what gets built on the land.</p>
+          </article>
+          <article class="card">
+            <div class="card-rule"></div>
+            <div class="card-num">02</div>
+            <div class="card-head">Tourism expansion</div>
+            <p class="card-body">External visitors reprice coastal and resort land independently of local income — a separate demand curve with no ceiling.</p>
+          </article>
+          <article class="card">
+            <div class="card-rule"></div>
+            <div class="card-num">03</div>
+            <div class="card-head">Infrastructure buildout</div>
+            <p class="card-body">We map confirmed pipeline and acquire before public pricing reflects delivery — 18–36 months early.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alpha-gap" id="alpha">
+      <div class="container alpha-grid">
+        <div class="label" style="color: var(--gold);">The alpha gap</div>
+        <div class="alpha-numbers">
+          <div class="alpha-side left">
+            <div class="alpha-value">~80%</div>
+            <div class="alpha-caption">Official residential index · 2018–2025</div>
+          </div>
+          <div class="alpha-divider"></div>
+          <div class="alpha-side right">
+            <div class="alpha-value">~360%</div>
+            <div class="alpha-caption">Raw land peak · same markets · same period</div>
+          </div>
+        </div>
+        <p class="alpha-copy">Raw land near confirmed infrastructure delivered 300–420% in our target corridors over 7 years. The residential index reported 40–120%. The full data — sourced by JLL, Colliers, CBRE, GeoStat, and national statistical authorities — is available in our Information Memorandum.</p>
+        <div class="alpha-actions">
+          <a class="cta-btn" href="#contact">Request the IM</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="markets">
+      <div class="container markets-wrap">
+        <div class="markets-head">
+          <div class="label">Global markets</div>
+          <h2>18 markets. Four tiers.</h2>
+          <p class="markets-copy">Scored across GDP growth, tourism momentum, infrastructure pipeline, legal access, and entry valuation.</p>
+        </div>
+        <div class="map-shell">
+          <div id="world-map" aria-label="World map showing investment tiers"></div>
+          <div class="legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#1F3D2B"></span>Tier 1 — Core growth</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#2A5239"></span>Tier 2 — Regional alpha</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#C8A96A"></span>Tier 3 — Stable / EU</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#2E4A62"></span>Tier 4 — High upside</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight">
+      <div class="container">
+        <div class="strategy-head">
+          <div class="label">Investment strategy</div>
+          <h2>Three strategies. One logic.</h2>
+          <p>Enter before the catalyst. Exit into the repricing.</p>
+        </div>
+        <div class="strategy-cards">
+          <article class="card card-dark">
+            <div class="card-rule"></div>
+            <div class="card-num">01</div>
+            <div class="card-head">Infrastructure-led land</div>
+            <p class="strategy-line">We acquire 18–36 months before delivery.</p>
+          </article>
+          <article class="card">
+            <div class="card-rule"></div>
+            <div class="card-num">02</div>
+            <div class="card-head">Tourism corridor land</div>
+            <p class="strategy-line">We enter before the international buyer wave arrives.</p>
+          </article>
+          <article class="card">
+            <div class="card-rule"></div>
+            <div class="card-num">03</div>
+            <div class="card-head">Development-ready plots</div>
+            <p class="strategy-line">We buy zoned or permitted land for faster exits.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="why-head">
+          <div class="label">Why this fund</div>
+          <h2>Four advantages no competitor can replicate.</h2>
+        </div>
+        <div class="why-cards">
+          <article class="why-card">
+            <div class="why-num">01</div>
+            <div class="why-title">Regional edge</div>
+            <p>Armenia-based, with direct access to Caucasus deal flow no international manager can replicate.</p>
+          </article>
+          <article class="why-card">
+            <div class="why-num">02</div>
+            <div class="why-title">Proprietary screen</div>
+            <p>18-country model. 5 weighted criteria. Updated quarterly.</p>
+          </article>
+          <article class="why-card">
+            <div class="why-num">03</div>
+            <div class="why-title">Global mandate</div>
+            <p>10+ markets. No single-country concentration. No single-strategy risk.</p>
+          </article>
+          <article class="why-card">
+            <div class="why-num">04</div>
+            <div class="why-title">Aligned incentives</div>
+            <p>We earn when investors earn. Not before.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-head">
+          <div class="label">Contact</div>
+          <h2>Land is where value creation begins.</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-copy">
+            <p>We are accepting enquiries from qualified investors and family offices for the first close of Global Land Alpha Fund I.</p>
+            <p>Request the Information Memorandum to receive full strategy, data, and fund terms.</p>
+            <div class="detail-list">
+              <div class="detail-row">
+                <div class="detail-label">Fund manager</div>
+                <div class="detail-value">Arsen Harutyunyan</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Base</div>
+                <div class="detail-value">Yerevan, Armenia</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Minimum ticket</div>
+                <div class="detail-value">$50,000 USD</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Status</div>
+                <div class="detail-value">Raising · Q1–Q2 2026</div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <form id="imForm" class="form-grid">
+              <div class="form-field">
+                <label for="fullName">Full name</label>
+                <input id="fullName" name="fullName" type="text" required />
+              </div>
+              <div class="form-field">
+                <label for="organisation">Organisation</label>
+                <input id="organisation" name="organisation" type="text" />
+              </div>
+              <div class="form-field">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+              <div class="form-field">
+                <label for="capacity">Investment capacity</label>
+                <input id="capacity" name="capacity" type="text" />
+              </div>
+              <div class="form-field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message"></textarea>
+              </div>
+              <button class="submit-btn" type="submit">Request the Information Memorandum</button>
+              <div id="formSuccess" class="form-success">Thank you. Your request has been received. We will contact you with the Information Memorandum.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">Global Land Alpha Fund I</div>
+      <div class="footer-copy">Confidential — for qualified investors only. This material does not constitute an offer to sell or a solicitation to buy securities. Investment in land involves significant risks including loss of capital. Past performance is not indicative of future results. © 2026</div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<section>
-  <div class="inner">
-    <span class="label">Global markets</span>
-    <h2>18 markets screened.<br>Four investment tiers.</h2>
-    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;color:var(--muted);max-width:520px;margin-top:.75rem">Evaluated across GDP growth, tourism momentum, infrastructure pipeline, legal access, FX stability, and entry valuation.</p>
-    <div class="map-wrap">
-      <div id="worldmap"></div>
-      <div class="map-legend">
-        <div class="leg-item"><div class="leg-dot" style="background:#1F3D2B"></div>Tier 1 — Core growth</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#2A5239"></div>Tier 2 — Regional alpha</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#C8A96A"></div>Tier 3 — Stable / EU</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#2E4A62"></div>Tier 4 — High upside</div>
-        <div class="leg-item"><div class="leg-dot" style="background:#D9D4CC"></div>Not invested</div>
-      </div>
-    </div>
-  </div>
-</section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('navLinks');
 
-<section>
-  <div class="inner">
-    <span class="label">Portfolio allocation</span>
-    <h2>Diversified by design.<br>Balanced for return.</h2>
-    <div class="alloc-layout">
-      <div class="alloc-bars">
-        <div class="ab-row">
-          <span class="ab-lbl">Core growth</span>
-          <div class="ab-track"><div class="ab-fill" style="width:45%;background:#1F3D2B"></div></div>
-          <span class="ab-pct">40–50%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">Regional alpha</span>
-          <div class="ab-track"><div class="ab-fill" style="width:27%;background:#2A5239"></div></div>
-          <span class="ab-pct">25–30%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">Stable / EU</span>
-          <div class="ab-track"><div class="ab-fill" style="width:27%;background:#C8A96A"></div></div>
-          <span class="ab-pct">25–30%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">High upside</span>
-          <div class="ab-track"><div class="ab-fill" style="width:8%;background:#2E4A62"></div></div>
-          <span class="ab-pct">0–10%</span>
-        </div>
-        <div class="ab-row">
-          <span class="ab-lbl">Tactical</span>
-          <div class="ab-track"><div class="ab-fill" style="width:4%;background:#7A7A6A"></div></div>
-          <span class="ab-pct">0–5%</span>
-        </div>
-      </div>
-      <div class="alloc-text">
-        <h3>Conservative construction.<br>Maximum return per unit of risk.</h3>
-        <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.85rem;color:var(--muted);margin-top:.75rem;line-height:1.7">Core markets form the return engine. Regional alpha positions deliver our home-market edge. Stable EU markets anchor LP confidence. No single country exceeds 25% of fund value.</p>
-        <div class="tier-chips">
-          <div class="tier-chip"><div class="tc-dot" style="background:#1F3D2B"></div><span class="tc-text">India · Vietnam · UAE · Saudi Arabia</span><span class="tc-roi">100–400% 7Y</span></div>
-          <div class="tier-chip"><div class="tc-dot" style="background:#2A5239"></div><span class="tc-text">Georgia · Armenia</span><span class="tc-roi">80–320% 7Y</span></div>
-          <div class="tier-chip"><div class="tc-dot" style="background:#C8A96A"></div><span class="tc-text">Portugal · Spain · Cyprus · Chile</span><span class="tc-roi">35–80% 7Y</span></div>
-          <div class="tier-chip"><div class="tc-dot" style="background:#2E4A62"></div><span class="tc-text">Morocco · Albania · Mexico</span><span class="tc-roi">60–550% 7Y</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
 
-<section class="cases-bg">
-  <div class="inner">
-    <span class="label">Proven in the last 7 years</span>
-    <h2>Documented raw land returns.<br>Sourced. Not modelled.</h2>
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-num">420%</div>
-        <div class="case-country">Vietnam</div>
-        <p class="case-desc">Industrial land in Long An province: VND 800k/m² → VND 4.2M/m² as Apple, Samsung, and Nike supply chains relocated from China.</p>
-        <div class="case-src">JLL Vietnam Industrial 2024</div>
-      </div>
-      <div class="case-card">
-        <div class="case-num">400%</div>
-        <div class="case-country">Mexico</div>
-        <p class="case-desc">Tulum tourism land: USD 30/m² → USD 180–350/m² on Maya Train corridor and luxury resort development wave.</p>
-        <div class="case-src">CBRE Mexico Industrial 2024</div>
-      </div>
-      <div class="case-card">
-        <div class="case-num">400%</div>
-        <div class="case-country">Georgia</div>
-        <p class="case-desc">Batumi boulevard-adjacent land: USD 80/m² → USD 400/m²+ driven by Gulf and EU capital inflow. Unrestricted foreign ownership.</p>
-        <div class="case-src">Colliers Georgia 2024</div>
-      </div>
-      <div class="case-card">
-        <div class="case-num">320%</div>
-        <div class="case-country">Armenia</div>
-        <p class="case-desc">Yerevan Kentron district: AMD 200k/m² → AMD 700k/m²+ on Russian capital re-routing and IT sector growth. Secondary corridors remain mispriced.</p>
-        <div class="case-src">CBA RPPI Q4 2025</div>
-      </div>
-    </div>
-  </div>
-</section>
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
 
-<section>
-  <div class="inner">
-    <span class="label">Investment strategy</span>
-    <h2>Three strategies.<br>One logic.</h2>
-    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:.9rem;color:var(--muted);max-width:480px;margin-top:.5rem;margin-bottom:0">Enter before the catalyst. Exit into the repricing.</p>
-    <div class="strat-grid">
-      <div class="strat-card dark">
-        <span class="s-num">01</span>
-        <div class="s-pct">50%</div>
-        <div class="s-head">Infrastructure-led land</div>
-        <div class="s-row"><span class="s-row-lbl">Entry logic</span><span class="s-row-val">Acquire 18–36 months before airport, highway, or logistics hub delivery. Land prices in access before it exists.</span></div>
-        <div class="s-row" style="border-bottom:none"><span class="s-row-lbl">Exit buyers</span><span class="s-row-val">Developers · Logistics operators · Industrial REITs</span></div>
-      </div>
-      <div class="strat-card">
-        <span class="s-num">02</span>
-        <div class="s-pct">30%</div>
-        <div class="s-head">Tourism corridor land</div>
-        <div class="s-row"><span class="s-row-lbl">Entry logic</span><span class="s-row-val">Coastal and resort land before international buyer pool arrives. Tourism compounds: 15% annual growth = 2× visitor base in 5 years.</span></div>
-        <div class="s-row" style="border-bottom:none"><span class="s-row-lbl">Exit buyers</span><span class="s-row-val">Hospitality groups · Villa developers · Second-home buyers</span></div>
-      </div>
-      <div class="strat-card">
-        <span class="s-num">03</span>
-        <div class="s-pct">20%</div>
-        <div class="s-head">Development-ready plots</div>
-        <div class="s-row"><span class="s-row-lbl">Entry logic</span><span class="s-row-val">Zoned or permit-ready land. Rezoning creates a valuation step-up captured at exit. Shorter 2–4 year cycle.</span></div>
-        <div class="s-row" style="border-bottom:none"><span class="s-row-lbl">Exit buyers</span><span class="s-row-val">Residential developers · Retail buyers · Commercial operators</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+    const form = document.getElementById('imForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      success.style.display = 'block';
+      form.reset();
+    });
 
-<section>
-  <div class="inner">
-    <span class="label">Why this fund</span>
-    <h2>Four structural advantages<br>no competitor can replicate.</h2>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-num">01</div>
-        <div class="why-head">Regional edge</div>
-        <p class="why-body">Armenia-based. Deal flow in Georgia and Armenia requires local language, legal relationships, and cadastre navigation. No fund manager in London or Singapore can replicate this.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">02</div>
-        <div class="why-head">Proprietary screen</div>
-        <p class="why-body">18-country model scored across 5 weighted criteria — GDP growth, tourism, ROI potential, legal access, FX stability. Updated quarterly. Every deployment decision is anchored to data.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">03</div>
-        <div class="why-head">Global mandate</div>
-        <p class="why-body">10+ markets across 4 tiers. No single-country bet. No single-strategy concentration. Infrastructure delays in one market cannot destroy fund-level returns.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-num">04</div>
-        <div class="why-head">Aligned incentives</div>
-        <p class="why-body">2% management fee. 20% carry above preferred return. 80% of all profits to LPs before carry is earned. We do not earn performance fees until investors have been paid first.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    const tierColors = {
+      tier1: '#1F3D2B',
+      tier2: '#2A5239',
+      tier3: '#C8A96A',
+      tier4: '#2E4A62',
+      rest: '#D8D2C8'
+    };
 
-<section class="fund-bg">
-  <div class="inner">
-    <span class="label">Fund structure</span>
-    <h2>Institutional terms.<br>Transparent economics.</h2>
-    <div class="fund-grid">
-      <div class="fund-card">
-        <div class="fund-head">Target IRR</div>
-        <div class="fund-val">15–20%</div>
-        <p class="fund-body">Per annum, unlevered land-level return. Conservative base case using 55–65% capture of documented historical corridor returns.</p>
-      </div>
-      <div class="fund-card">
-        <div class="fund-head">Total return</div>
-        <div class="fund-val">2–3×</div>
-        <p class="fund-body">Over the 7-year fund horizon. Aggressive case supports 3.5–5× where Georgia and Armenia alpha positions perform at their documented ceiling.</p>
-      </div>
-      <div class="fund-card">
-        <div class="fund-head">Fee structure</div>
-        <div class="fund-val">2 / 20</div>
-        <p class="fund-body">2% management fee per annum. 20% performance fee above 0–6% preferred return hurdle. 80/20 LP/GP split. No deal-level promotes. No hidden charges.</p>
-      </div>
-      <div class="fund-card">
-        <div class="fund-head">Fund size</div>
-        <div class="fund-val">$2–5M</div>
-        <p class="fund-body">Initial close, expandable to $10M. Minimum ticket $50,000. Quarterly capital drawdown as deals close. Target first close Q2 2026.</p>
-      </div>
-      <div class="fund-card">
-        <div class="fund-head">Fund life</div>
-        <div class="fund-val">7 yrs</div>
-        <p class="fund-body">With optional 1-year extension. Longer horizon allows infrastructure to fully mature and second appreciation legs to be captured in alpha markets.</p>
-      </div>
-      <div class="fund-card">
-        <div class="fund-head">Geography</div>
-        <div class="fund-val">10+</div>
-        <p class="fund-body">Countries across Asia, MENA, Caucasus, EU, and Latin America. Max 25% per country. Min 20% in Tier 3 stability markets at all times.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    const countryTiers = {
+      356: 'tier1', 784: 'tier1', 682: 'tier1', 704: 'tier1',
+      268: 'tier2', 51: 'tier2',
+      620: 'tier3', 724: 'tier3', 196: 'tier3', 152: 'tier3',
+      504: 'tier4', 8: 'tier4', 484: 'tier4', 860: 'tier4'
+    };
 
-<section>
-  <div class="inner">
-    <span class="label">Contact</span>
-    <h2>Land is where value<br>creation begins.</h2>
-    <div class="contact-layout">
-      <div class="contact-text">
-        <p>We are currently accepting enquiries from qualified investors, family offices, and institutional allocators for the first close of Global Land Alpha Fund I.</p>
-        <p>Minimum ticket: $50,000. Target first close: Q2 2026.</p>
-        <div class="c-detail">
-          <div class="c-det-row"><strong>Fund manager</strong> &nbsp;Arsen Harutyunyan</div>
-          <div class="c-det-row"><strong>Domicile</strong> &nbsp;Yerevan, Armenia</div>
-          <div class="c-det-row"><strong>Mandate</strong> &nbsp;Global · 10+ markets</div>
-          <div class="c-det-row"><strong>Status</strong> &nbsp;Raising · Q1–Q2 2026</div>
-        </div>
-      </div>
-      <div>
-        <div class="contact-form">
-          <div class="cf-row"><label class="cf-lbl">Full name</label><input class="cf-input" type="text" placeholder="Your name"></div>
-          <div class="cf-row"><label class="cf-lbl">Organisation</label><input class="cf-input" type="text" placeholder="Fund, family office, or firm"></div>
-          <div class="cf-row"><label class="cf-lbl">Email address</label><input class="cf-input" type="email" placeholder="your@email.com"></div>
-          <div class="cf-row"><label class="cf-lbl">Investment capacity (USD)</label><input class="cf-input" type="text" placeholder="e.g. $100,000–$500,000"></div>
-          <div class="cf-row"><label class="cf-lbl">Message</label><textarea class="cf-input cf-ta" placeholder="What would you like to know about the fund?"></textarea></div>
-          <button class="cf-submit">Request information</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    function drawMap() {
+      const host = document.getElementById('world-map');
+      const width = host.clientWidth;
+      const height = Math.max(300, Math.min(560, width * 0.55));
+      host.innerHTML = '';
 
-<footer>
-  <span class="ft-logo">Global Land Alpha Fund I</span>
-  <span class="ft-disc">Confidential — prepared for qualified investors only. This material does not constitute an offer to sell or a solicitation to buy securities. Investment in land involves significant risks including loss of capital. Past performance of referenced markets is not indicative of future results. &copy; 2026</span>
-</footer>
+      const svg = d3.select(host)
+        .append('svg')
+        .attr('viewBox', `0 0 ${width} ${height}`)
+        .attr('width', '100%')
+        .attr('height', height)
+        .attr('role', 'img');
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script>
-const TIER_COLORS = {
-  '356':'#1F3D2B','704':'#1F3D2B','356':'#1F3D2B','682':'#1F3D2B','784':'#1F3D2B',
-  '704':'#1F3D2B',
-  '268':'#2A5239','051':'#2A5239',
-  '620':'#C8A96A','724':'#C8A96A','196':'#C8A96A','152':'#C8A96A','392':'#C8A96A','620':'#C8A96A',
-  '504':'#2E4A62','008':'#2E4A62','484':'#2E4A62','860':'#2E4A62',
-};
+      const projection = d3.geoNaturalEarth1()
+        .fitExtent([[14, 14], [width - 14, height - 14]], { type: 'Sphere' });
 
-const TIER_MAP = {
-  356:'#1F3D2B',
-  784:'#1F3D2B',
-  682:'#1F3D2B',
-  704:'#1F3D2B',
-  268:'#2A5239',
-  51:'#2A5239',
-  620:'#C8A96A',
-  724:'#C8A96A',
-  196:'#C8A96A',
-  152:'#C8A96A',
-  392:'#C8A96A',
-  504:'#2E4A62',
-  8:'#2E4A62',
-  484:'#2E4A62',
-  860:'#2E4A62',
-};
+      const path = d3.geoPath(projection);
 
-const isDark = matchMedia('(prefers-color-scheme:dark)').matches;
-const landColor = isDark ? '#2A2A2A' : '#D9D4CC';
-const strokeColor = isDark ? '#1A1A1A' : '#F5F3EF';
+      svg.append('path')
+        .datum({ type: 'Sphere' })
+        .attr('d', path)
+        .attr('fill', '#F5F3EF')
+        .attr('stroke', '#E1DBD0')
+        .attr('stroke-width', 0.7);
 
-const container = document.getElementById('worldmap');
-const svg = d3.select('#worldmap').append('svg')
-  .attr('viewBox','0 0 960 500')
-  .attr('width','100%')
-  .style('display','block');
+      d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
+        const countries = topojson.feature(world, world.objects.countries).features;
 
-const projection = d3.geoNaturalEarth1().scale(153).translate([480,250]);
-const path = d3.geoPath(projection);
+        svg.append('g')
+          .selectAll('path')
+          .data(countries)
+          .join('path')
+          .attr('d', path)
+          .attr('fill', d => {
+            const tier = countryTiers[+d.id];
+            return tier ? tierColors[tier] : tierColors.rest;
+          })
+          .attr('stroke', '#F5F3EF')
+          .attr('stroke-width', 0.4);
+      }).catch(() => {
+        host.innerHTML = '<div style="padding:40px;text-align:center;color:#6A6A5A;">Map unavailable.</div>';
+      });
+    }
 
-d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
-  const countries = topojson.feature(world, world.objects.countries);
-  svg.selectAll('path')
-    .data(countries.features)
-    .join('path')
-    .attr('d', path)
-    .attr('fill', d => TIER_MAP[+d.id] || landColor)
-    .attr('stroke', strokeColor)
-    .attr('stroke-width', 0.4);
-}).catch(() => {
-  svg.append('text').attr('x',480).attr('y',250)
-    .attr('text-anchor','middle')
-    .attr('fill','#7A7A6A')
-    .attr('font-size','14')
-    .text('Map loading — check connection');
-});
-</script>
+    window.addEventListener('load', drawMap);
+    window.addEventListener('resize', drawMap);
+  </script>
+</body>
+</html>
